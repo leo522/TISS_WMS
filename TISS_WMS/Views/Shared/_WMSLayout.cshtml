@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國家運動科學中心庫存管理系統</title>
+    <link rel="icon" href="~/images/favicon.svg" />
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/css/WMSmaster.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <!-- 左側導航欄 -->
+        <aside id="sidebar">
+            <ul>
+                <li><a href="~/Home/Index">帳號信息</a></li>
+                <li><a href="~/Inventory/Manage">入庫管理</a></li>
+                <li><a href="~/Product/AddProduct">添加入庫</a></li>
+                <li><a href="~/Inventory/View">入庫查詢</a></li>
+                <li><a href="~/Inventory/Stock">庫存管理</a></li>
+                <li><a href="~/Outbound/Manage">出庫管理</a></li>
+                <li><a href="~/Return/Manage">退貨管理</a></li>
+                <li><a href="~/Account/UserManage">人員管理</a></li>
+                <li><a href="~/System/Help">系統說明</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主體內容 -->
+        <div class="main-content">
+            <header>
+                <div class="header-container">
+                    <div class="logo">國家運動科學中心庫存管理系統</div>
+                    <div class="user-info">管理員: xxx 您好</div>
+                    <div class="logout"><a href="~/Account/Logout">登出</a></div>
+                </div>
+            </header>
+            @RenderBody()
+        </div>
+    </div>
+
+    <script>
+        // 適用於小螢幕的選單切換功能
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            var sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        });
+    </script>
+</body>
+</html>
