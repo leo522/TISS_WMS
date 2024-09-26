@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,24 +12,23 @@
     <link href="~/css/WMSmaster.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <!-- 左側導航欄 -->
-        <aside id="sidebar">
-            <ul>
-                <li><a href="~/Home/Index">帳號信息</a></li>
-                <li><a href="~/Inventory/Manage">入庫管理</a></li>
-                <li><a href="~/Product/AddProduct">添加入庫</a></li>
-                <li><a href="~/Inventory/View">入庫查詢</a></li>
-                <li><a href="~/Inventory/Stock">庫存管理</a></li>
-                <li><a href="~/Outbound/Manage">出庫管理</a></li>
-                <li><a href="~/Return/Manage">退貨管理</a></li>
-                <li><a href="~/Account/UserManage">人員管理</a></li>
-                <li><a href="~/System/Help">系統說明</a></li>
-            </ul>
-        </aside>
-
-        <!-- 主體內容 -->
-        <div class="main-content">
+    <div class="container">-->
+<!-- 左側導航欄 -->
+<!--<aside id="sidebar">
+    <ul>
+        <li><a href="~/Home/Index">帳號信息</a></li>
+        <li><a href="~/Inventory/Manage">入庫管理</a></li>
+        <li><a href="~/Product/AddProduct">添加入庫</a></li>
+        <li><a href="~/Inventory/View">入庫查詢</a></li>
+        <li><a href="~/Inventory/Stock">庫存管理</a></li>
+        <li><a href="~/Outbound/Manage">出庫管理</a></li>
+        <li><a href="~/Return/Manage">退貨管理</a></li>
+        <li><a href="~/Account/UserManage">人員管理</a></li>
+        <li><a href="~/System/Help">系統說明</a></li>
+    </ul>
+</aside>-->
+<!-- 主體內容 -->
+<!--<div class="main-content">
             <header>
                 <div class="header-container">
                     <div class="logo">國家運動科學中心庫存管理系統</div>
@@ -48,5 +47,452 @@
             sidebar.classList.toggle("active");
         });
     </script>
+</body>
+</html>-->
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>國家運動科學中心庫存管理系統</title>
+    <link rel="icon" href="~/images/favicon.svg" />
+
+    <link rel='stylesheet' href='/yisha/css/style.min.css?v=638628701403373992' />
+    <script src='/yisha/js/yisha.min.js?v=638628701403373992' type='text/javascript'></script>
+    <link href="~/css/yisha.min.css" rel="stylesheet" />
+    <link href="~/css/style.min.css" rel="stylesheet" />
+
+    <link href="~/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/js/yisha.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/fontawesome/js/all.min.js"></script>
+    <script src="~/js/layer.min.js"></script>
+    <script src="~/js/data.min.js"></script>
+
+    <!--首頁需要用到的js開始-->
+    <script src="~/js/index.min.js"></script>
+    <script src="~/js/metisMenu.js"></script>
+    <script src="~/js/slimscroll.min.js"></script>
+    <!--首頁需要用到的js結束-->
+    @*<title>巧蓝科技</title>
+        <style type="text/css">
+            .nav > li:hover .dropdown-menu {
+                display: block;
+            }
+        </style>
+        <script type="text/javascript">
+            var ctx = '/';
+        </script>*@
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg login">
+    <script src='/yisha/js/yisha-data.min.js?v=638628701403373992' type='text/javascript'></script>
+
+    <div id="wrapper">
+        <!--左側導航-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close">
+                <i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element clear">
+                            <div class="image-left">
+
+                                <img alt="image" src="~/pic/KiKi.jpg" onerror="this.src='/image/portrait.png'; this.onerror=null;" class="img-circle" height="50" width="50" />
+                            </div>
+                            <div class="image-right">
+                                <span class="block m-t-xs" style="color:white">測試員</span>
+                                <span class="text-xs block" style="color:white">運動科學研究處</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-gear"></i>
+                            <span class="nav-label">系统管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/SystemManage/Role/RoleIndex'>角色管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/SystemManage/Menu/MenuIndex'>項目管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/SystemManage/DataDict/DataDictIndex'>通用字典</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/SystemManage/Area/AreaIndex'>行政區域</a>
+                            </li>
+                            <li data-type="menu">
+                                <a href="#">系统日誌<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level" data-type="menu">
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/SystemManage/LogLogin/LogLoginIndex'>登入日誌</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/SystemManage/LogOperate/LogOperateIndex'>操作日誌</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/SystemManage/LogApi/LogApiIndex'>Api日誌</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/SystemManage/AutoJob/AutoJobIndex'>排程</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/SystemManage/Database/DatatableIndex'>報表管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">單位組織</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/OrganizationManage/User/UserIndex'>員工管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/OrganizationManage/Department/DepartmentIndex'>部門管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/OrganizationManage/Position/PositionIndex'>職位管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/OrganizationManage/News/NewsIndex'>文章中心</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Note/NoteIndex'>備註</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-gears"></i>
+                            <span class="nav-label">系统工具</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/ToolManage/CodeGenerator/CodeGeneratorIndex'>代碼生成</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/ToolManage/Server/ServerIndex'>Sever信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-square-o"></i>
+                            <span class="nav-label">實例演示</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a href="#">表單<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level" data-type="menu">
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Button'>按鈕</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Grid'>栅栏</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Select'>下拉框</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Upload'>文件上傳</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Timeline'>時間軸</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Card'>卡片列表</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Tab'>選項卡</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Panel'>面板</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Datetime'>日期與時間</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Form/Editor'>文章編輯器</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-type="menu">
+                                <a href="#">表格<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level" data-type="menu">
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Table/Footer'>數據彙整</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Table/GroupHeader'>组合表頭</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Table/Editable'>表格行内編輯</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Table/Image'>表格圖片預覽</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Table/MultiToolbar'>多工具欄</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-type="menu">
+                                <a href="#">报表<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level" data-type="menu">
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Report/ECharts'>ECharts</a>
+                                    </li>
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Report/Peity'>Peity</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-type="menu">
+                                <a href="#">图标<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level" data-type="menu">
+                                    <li data-type="menu">
+                                        <a class="menuItem" href="#" data-url='/DemoManage/Icon/FontAwesome'>FontAwesome</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-american-sign-language-interpreting"></i>
+                            <span class="nav-label">特效展板</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/JsSpecial/JsSpecialIndex'>JS特效配置</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-book"></i>
+                            <span class="nav-label">基礎管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Mdwarehouse/MdwarehouseIndex'>倉庫管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Mdlocation/MdlocationIndex'>庫區管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Mdbin/MdbinIndex'>庫位管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Mditem/MditemIndex'>物料管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Mdsupplier/MdsupplierIndex'>供應商管理</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Mdcustom/MdcustomIndex'>客戶管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-flag"></i>
+                            <span class="nav-label">計畫管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Buyplan/BuyplanIndex'>採購計畫</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Buyplandetail/BuyplandetailIndex'>採購計畫明细</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Saleplan/SaleplanIndex'>銷售計劃</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Saleplandetail/SaleplandetailIndex'>銷售計劃明细</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-type="menu">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="nav-label">業務管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" data-type="menu">
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Instock/InstockIndex'>入庫單</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Instockdetail/InstockdetailIndex'>入庫單明细</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Outstock/OutstockIndex'>出庫單</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Outstockdetail/OutstockdetailIndex'>出庫單明细</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Transfer/TransferIndex'>調撥單</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Transferdetail/TransferdetailIndex'>調撥單明细</a>
+                            </li>
+                            <li data-type="menu">
+                                <a class="menuItem" href="#" data-url='/BusinessManage/Stock/StockIndex'>庫存管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--左側導航结束-->
+        <!--右側部分開始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <a class="navbar-minimalize minimalize-styl-2" href="#" title="收起菜单">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <ul class="nav navbar-top-links navbar-right welcome-message">
+                        <li><a id="fullScreen"><i class="fa fa-arrows-alt"></i>全螢幕</a></li>
+                        <li class="dropdown user-menu">
+                            <a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
+                                <img src="http://img.qaoln.cn/leyou/414bca9b43be41bebcef7c8f7f1a1235.png?e=1727244689&amp;token=i9CMoV1nwBq19FsknBJ0Vgm4IFOMi94ZZYpt0XrO:twHozgxbmdQNkbH2q7BfrRaY-Zg=" class="user-image" onerror="this.src='/image/portrait.png'; this.onerror=null;">
+                                <span class="hidden-xs">樂優</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="mt5">
+                                    <a class="menuItem" href="#" data-url='/OrganizationManage/User/UserDetail?id=16508640061130152'>
+                                        <i class="fa fa-user"></i> 個人中心
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="showChangePasswordForm()">
+                                        <i class="fa fa-key"></i> 修改密码
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="showSwitchSkinForm()">
+                                        <i class="fa fa-dashboard"></i> 切换主题
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#" onclick="loginOff()">
+                                        <i class="fa fa-sign-out"></i> 登出
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left tabLeft">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active menuTab" data-id="/system/main">首頁</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right tabRight">
+                    <i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">
+                        頁籤操作<span class="caret"></span>
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li><a class="tabCloseCurrent" href="#">關閉當前</a></li>
+                        <li><a class="tabCloseOther" href="#">關閉其他</a></li>
+                        <li><a class="tabCloseAll" href="#">全部關閉</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
+            </div>
+            <div class="row mainContent" id="content-main">
+                <iframe class="YiSha_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main" src="/Home/Welcome" frameborder="0" seamless></iframe>
+            </div>
+        </div>
+        <!--右側部分結束-->
+    </div>
+
+    <script type="text/javascript">
+        if (!ys.isNullOrEmpty($.cookie('Skin'))) {
+            var skin = decodeURIComponent($.cookie('Skin'));
+            $("body").addClass(skin.split('|')[0]);
+            $("body").addClass(skin.split('|')[1]);
+        } else {
+            var sideTheme = "theme-dark";
+            var skinName = "skin-blue";
+            $("body").addClass(sideTheme);
+            $("body").addClass(skinName);
+        }
+
+        function showChangePasswordForm() {
+            ys.openDialog({
+                title: "修改密码",
+                content: '/OrganizationManage/User/ChangePassword' + '?id=16508640061130152',
+                height: "500px",
+                callback: function (index, layero) {
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    iframeWin.saveForm(index);
+                }
+            });
+        }
+
+        function showSwitchSkinForm() {
+            ys.openDialog({
+                title: "切换主题",
+                content: '/Home/Skin',
+                width: '530px',
+                height: '390px',
+                btn: null,
+                maxmin: false
+            });
+        }
+
+        function loginOff() {
+            ys.ajax({
+                url: '/Home/LoginOffJson',
+                type: "post",
+                success: function (obj) {
+                    if (obj.Tag == 1) {
+                        location.href = '/Home/Index';
+                    }
+                    else {
+                        ys.msgError(obj.Message);
+                    }
+                }
+            });
+        }
+    </script>
+    <link rel='stylesheet' href='/yisha/css/yisha.min.css?v=638628701403373992' />
+    <script src='/yisha/js/yisha-init.min.js?v=638628701403373992' type='text/javascript'></script>
 </body>
 </html>
