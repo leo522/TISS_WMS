@@ -25,22 +25,17 @@ namespace TISS_WMS.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ActivityLog> ActivityLog { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Delivery> Delivery { get; set; }
-        public virtual DbSet<DeliveryDetails> DeliveryDetails { get; set; }
-        public virtual DbSet<InternalEmployees> InternalEmployees { get; set; }
-        public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Programs> Programs { get; set; }
-        public virtual DbSet<Receipt> Receipt { get; set; }
-        public virtual DbSet<ReceiptDetails> ReceiptDetails { get; set; }
+        public virtual DbSet<Inventory> Inventory { get; set; }
+        public virtual DbSet<Material> Material { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<StockIn> StockIn { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
-        public virtual DbSet<Transfer> Transfer { get; set; }
-        public virtual DbSet<TransferDetails> TransferDetails { get; set; }
-        public virtual DbSet<UserAuthority> UserAuthority { get; set; }
+        public virtual DbSet<UserActivities> UserActivities { get; set; }
+        public virtual DbSet<UserLogs> UserLogs { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<XINUser> XINUser { get; set; }
+        public virtual DbSet<WarehouseLocation> WarehouseLocation { get; set; }
     }
 }

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TISS_WMS.Models.Users>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>人員權限管理</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>人員權限管理</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>帳號</th>
+                    <th>電子郵件</th>
+                    <th>角色</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserAccount</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @using (Html.BeginForm("UpdateRoles", "Account", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="userId" value="@user.UserID" />
+
+                                <!-- 多選角色下拉選單 -->
+                                @Html.ListBox("roleIds", new MultiSelectList(ViewBag.Roles, "RoleID", "RoleName", user.UserRoles.Select(ur => ur.RoleID)), new { @class = "form-control" })
+                            }
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm">更新角色</button>
+                            @* 確保這裡的結束標籤正確 *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

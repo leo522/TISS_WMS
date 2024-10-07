@@ -17,24 +17,16 @@ namespace TISS_WMS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
-            this.Receipt = new HashSet<Receipt>();
+            this.StockIn = new HashSet<StockIn>();
         }
     
         public int SupplierID { get; set; }
-        public string AttribName { get; set; }
-        public string CompanyName { get; set; }
-        public string EarNO { get; set; }
-        public string JoinMan { get; set; }
-        public string Tel1 { get; set; }
-        public string Tel2 { get; set; }
-        public string Fax { get; set; }
-        public string MobilePhone { get; set; }
-        public string CompanyAddress { get; set; }
-        public string DeliveryAddress { get; set; }
-        public Nullable<System.DateTime> LastDeliveryDate { get; set; }
-        public string Comment { get; set; }
+        public string SupplierName { get; set; }
+        public string ContactInfo { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Receipt> Receipt { get; set; }
+        public virtual ICollection<StockIn> StockIn { get; set; }
     }
 }

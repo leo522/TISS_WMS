@@ -12,19 +12,20 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class XINUser
+    public partial class Material
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public XINUser()
+        public Material()
         {
-            this.UserAuthority = new HashSet<UserAuthority>();
+            this.Inventory = new HashSet<Inventory>();
         }
     
-        public string EmployeeNo { get; set; }
-        public string EmployeeName { get; set; }
-        public string PasswordCode { get; set; }
+        public int MaterialID { get; set; }
+        public string MaterialName { get; set; }
+        public string MaterialType { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserAuthority> UserAuthority { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

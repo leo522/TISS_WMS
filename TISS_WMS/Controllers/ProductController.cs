@@ -16,42 +16,5 @@ namespace TISS_WMS.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddProduct(Product product, int supplierId, int quantity) 
-        {
-            if (ModelState.IsValid)
-            {
-                //創建入庫單據
-                var receipt = new Receipt
-                {
-                    //SupplierID = supplierId,
-                    ReceiptDate = DateTime.Now,
-                };
-
-                _db.Receipt.Add(receipt);
-
-                await _db.SaveChangesAsync();
-
-                //創建入庫明細
-                var receiptDetails = new ReceiptDetails
-                {
-                    ReceiptID = receipt.ReceiptID,
-                    //ProductID = product.ProductID,
-                    Quantity = quantity
-                };
-
-                _db.ReceiptDetails.Add(receiptDetails);
-
-                //更新產品庫存
-                product.Stock += quantity;
-
-                await _db.SaveChangesAsync();
-
-                return RedirectToAction("Main");
-            }
-            return View(product);
-        }
     }
 }

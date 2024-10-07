@@ -118,6 +118,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -129,8 +135,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\StockController.cs" />
@@ -139,52 +147,40 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\accountModel.cs" />
+    <Compile Include="Models\ActivityLog.cs">
+      <DependentUpon>WMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Delivery.cs">
+    <Compile Include="Models\Inventory.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeliveryDetails.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\InternalEmployees.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PasswordResetRequests.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Programs.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Receipt.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ReceiptDetails.cs">
+    <Compile Include="Models\Material.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StockIn.cs">
+      <DependentUpon>WMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Transfer.cs">
+    <Compile Include="Models\UserActivities.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TransferDetails.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserAuthority.cs">
+    <Compile Include="Models\UserLogs.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRoles.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
+      <DependentUpon>WMSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WarehouseLocation.cs">
       <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WMSModel.Context.cs">
@@ -201,9 +197,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WMSModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\XINUser.cs">
-      <DependentUpon>WMSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -224,6 +217,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="css\MainStyle.css" />
+    <Content Include="css\StockCreateStyle.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
     <Content Include="css\WMSmaster.css" />
@@ -2335,9 +2330,11 @@
       <DependentUpon>WMSModel.edmx</DependentUpon>
       <LastGenOutput>WMSModel.cs</LastGenOutput>
     </Content>
+    <Content Include="pic\404.jpg" />
     <Content Include="pic\favicon.svg" />
     <Content Include="pic\KiKi.jpg" />
     <Content Include="pic\logo.svg" />
+    <Content Include="pic\Mantenance.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2437,11 +2434,16 @@
     <Content Include="Views\Shared\_WMSLayout.cshtml" />
     <Content Include="Views\Main\Main.cshtml" />
     <Content Include="Views\Product\AddProduct.cshtml" />
+    <Content Include="Views\Account\ManageUsers.cshtml" />
+    <Content Include="Views\Error\Page404.cshtml" />
+    <Content Include="Views\Maintenance\MaintenanceRepair.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\Stock\StockCreate.cshtml" />
+    <Content Include="Views\Stock\StockManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Sales\" />
-    <Folder Include="Views\Stock\" />
     <Folder Include="Views\Vender\" />
   </ItemGroup>
   <ItemGroup>

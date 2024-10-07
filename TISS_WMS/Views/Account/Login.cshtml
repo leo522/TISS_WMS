@@ -31,36 +31,49 @@
 </head>
 <body>
     <div class="login-container">
+        <!-- 註冊成功提示訊息 -->
         @if (TempData["RegisterMessage"] != null)
         {
             <script type="text/javascript">
                 alert('@TempData["RegisterMessage"]');
             </script>
         }
+
         <div class="text-center">
             <img src="~/pic/logo.svg" alt="Logo" style="height: 45px; width: 100%;">
         </div>
-        <form action="/Tiss/Login" method="post">
+
+        <!-- 登入表單 -->
+        <form action="/Account/Login" method="post">
+            @Html.AntiForgeryToken() <!-- 防止 CSRF 攻擊 -->
+
             <div class="form-group">
-                <label for="Username">帳號</label>
-                <input type="text" class="form-control" id="Username" name="Username" placeholder="請輸入帳號" required>
+                <label for="userAccount">帳號</label>
+                <input type="text" class="form-control" id="userAccount" name="userAccount" placeholder="請輸入帳號" required>
             </div>
+
             <div class="form-group">
-                <label for="Password">密碼</label>
+                <label for="pwd">密碼</label>
                 <input type="password" class="form-control" id="pwd" name="pwd" placeholder="請輸入密碼" required>
             </div>
+
             <button type="submit" class="btn btn-primary btn-block">登入</button>
         </form>
+
         <div class="text-center mt-3">
             <a href="/Account/Register">註冊帳號</a>
         </div>
+
+        <!-- 錯誤提示區域 -->
         @if (ViewBag.ErrorMessage != null)
         {
             <div class="alert alert-danger" role="alert">
                 @ViewBag.ErrorMessage
             </div>
         }
+
         <hr>
+
         <div class="text-center">
             <a href="/Account/ForgotPassword" class="btn btn-link">忘記密碼</a>
         </div>

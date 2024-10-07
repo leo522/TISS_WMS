@@ -12,27 +12,19 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Receipt
+    public partial class WarehouseLocation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Receipt()
+        public WarehouseLocation()
         {
-            this.ReceiptDetails = new HashSet<ReceiptDetails>();
+            this.Inventory = new HashSet<Inventory>();
         }
     
-        public string ReceiptID { get; set; }
-        public System.DateTime ReceiptDate { get; set; }
-        public int SupplierID { get; set; }
-        public string ReceiptType { get; set; }
-        public string InvoiceNo { get; set; }
-        public int SubTotal { get; set; }
-        public Nullable<int> ValueAddTax { get; set; }
-        public int Amount { get; set; }
-        public string ShipAddress { get; set; }
-        public string Comment { get; set; }
+        public int LocationID { get; set; }
+        public string LocationName { get; set; }
+        public string Description { get; set; }
     
-        public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReceiptDetails> ReceiptDetails { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

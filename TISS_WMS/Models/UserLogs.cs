@@ -12,13 +12,14 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DeliveryDetails
+    public partial class UserLogs
     {
-        public string DeliveryID { get; set; }
-        public byte DeliverySeq { get; set; }
-        public string ProductID { get; set; }
-        public int Quantity { get; set; }
-        public int UnitPrice { get; set; }
-        public int Amount { get; set; }
+        public int LogID { get; set; }
+        public int UserID { get; set; }
+        public string Action { get; set; }
+        public Nullable<System.DateTime> ActionDate { get; set; }
+        public string IPAddress { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

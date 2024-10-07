@@ -12,12 +12,12 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class InternalEmployees
+    public partial class ActivityLog
     {
-        public string EmployeeID { get; set; }
-        public string Name { get; set; }
-        public string Department { get; set; }
-        public Nullable<bool> IsRegistered { get; set; }
-        public string EmailAddress { get; set; }
+        public int LogID { get; set; }
+        public string Action { get; set; }
+        public string Description { get; set; }
+        public string PerformedBy { get; set; }
+        public Nullable<System.DateTime> PerformedOn { get; set; }
     }
 }

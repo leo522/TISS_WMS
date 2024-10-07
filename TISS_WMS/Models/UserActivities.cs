@@ -12,13 +12,15 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PasswordResetRequests
+    public partial class UserActivities
     {
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Token { get; set; }
-        public System.DateTime ExpiryDate { get; set; }
-        public string UserAccount { get; set; }
-        public System.DateTime changeDate { get; set; }
+        public int ActivityID { get; set; }
+        public int UserID { get; set; }
+        public Nullable<int> InventoryID { get; set; }
+        public string Action { get; set; }
+        public Nullable<System.DateTime> ActionDate { get; set; }
+    
+        public virtual Inventory Inventory { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

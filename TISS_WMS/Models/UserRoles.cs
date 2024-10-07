@@ -14,9 +14,9 @@ namespace TISS_WMS.Models
     
     public partial class UserRoles
     {
-        public int UserRoleId { get; set; }
-        public int UserId { get; set; }
-        public int RoleId { get; set; }
+        public int UserRoleID { get; set; }
+        public int UserID { get; set; }
+        public int RoleID { get; set; }
     
         public virtual Roles Roles { get; set; }
         public virtual Users Users { get; set; }

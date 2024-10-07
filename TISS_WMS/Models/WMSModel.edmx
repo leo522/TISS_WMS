@@ -5,354 +5,301 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TISS_WMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="PerformedBy" Type="nvarchar" MaxLength="10" />
+          <Property Name="PerformedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
           </Key>
-          <Property Name="CustomerID" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="AttribName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="EarNO" Type="nvarchar" MaxLength="8" />
-          <Property Name="JoinMan" Type="nvarchar" MaxLength="20" />
-          <Property Name="Tel1" Type="nvarchar" MaxLength="20" />
-          <Property Name="Tel2" Type="nvarchar" MaxLength="20" />
-          <Property Name="Fax" Type="nvarchar" MaxLength="20" />
-          <Property Name="MobilePhone" Type="nvarchar" MaxLength="10" />
-          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastDeliveryDate" Type="date" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="150" />
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContactInfo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="Delivery">
+        <EntityType Name="Inventory">
           <Key>
-            <PropertyRef Name="DeliveryID" />
+            <PropertyRef Name="InventoryID" />
           </Key>
-          <Property Name="DeliveryID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="DeliveryDate" Type="date" Nullable="false" />
-          <Property Name="CustomerID" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="JoinMan" Type="nvarchar" MaxLength="20" />
-          <Property Name="DeliveryType" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="15" />
-          <Property Name="SubTotal" Type="int" Nullable="false" />
-          <Property Name="ValueAddTax" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="ShipAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="150" />
-        </EntityType>
-        <EntityType Name="DeliveryDetails">
-          <Key>
-            <PropertyRef Name="DeliveryID" />
-            <PropertyRef Name="DeliverySeq" />
-          </Key>
-          <Property Name="DeliveryID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="DeliverySeq" Type="tinyint" Nullable="false" />
-          <Property Name="ProductID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="InventoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="100" />
           <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="UnitPrice" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="WarehouseLocationID" Type="int" />
+          <Property Name="MaterialID" Type="int" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="InternalEmployees">
+        <EntityType Name="Material">
           <Key>
-            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="MaterialID" />
           </Key>
-          <Property Name="EmployeeID" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="10" />
-          <Property Name="Department" Type="nvarchar" MaxLength="30" />
-          <Property Name="IsRegistered" Type="bit" />
-          <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
-        </EntityType>
-        <EntityType Name="PasswordResetRequests">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Token" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
-          <Property Name="UserAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="changeDate" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Unit" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="LastReceiptDate" Type="date" />
-          <Property Name="LastDeliveryDate" Type="date" />
-          <Property Name="StopSales" Type="bit" Nullable="false" />
-          <Property Name="Price" Type="int" Nullable="false" />
-          <Property Name="Stock" Type="int" Nullable="false" />
-          <Property Name="Picture" Type="image" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="150" />
-        </EntityType>
-        <EntityType Name="Programs">
-          <Key>
-            <PropertyRef Name="ProgramsID" />
-          </Key>
-          <Property Name="ProgramsID" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="ProgramsName" Type="nvarchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Receipt">
-          <Key>
-            <PropertyRef Name="ReceiptID" />
-          </Key>
-          <Property Name="ReceiptID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ReceiptDate" Type="date" Nullable="false" />
-          <Property Name="SupplierID" Type="int" Nullable="false" />
-          <Property Name="ReceiptType" Type="char" MaxLength="1" />
-          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="10" />
-          <Property Name="SubTotal" Type="int" Nullable="false" />
-          <Property Name="ValueAddTax" Type="int" />
-          <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="ShipAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="150" />
-        </EntityType>
-        <EntityType Name="ReceiptDetails">
-          <Key>
-            <PropertyRef Name="ReceiptID" />
-            <PropertyRef Name="ReceiptSeq" />
-          </Key>
-          <Property Name="ReceiptID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="ReceiptSeq" Type="tinyint" Nullable="false" />
-          <Property Name="ProductID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="UnitPrice" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="MaterialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialName" Type="nvarchar" MaxLength="20" />
+          <Property Name="MaterialType" Type="nvarchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StockIn">
+          <Key>
+            <PropertyRef Name="StockInID" />
+          </Key>
+          <Property Name="StockInID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ReceivedDate" Type="datetime" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierID" />
           </Key>
-          <Property Name="SupplierID" Type="int" Nullable="false" />
-          <Property Name="AttribName" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
-          <Property Name="EarNO" Type="nvarchar" MaxLength="8" />
-          <Property Name="JoinMan" Type="nvarchar" MaxLength="20" />
-          <Property Name="Tel1" Type="nvarchar" MaxLength="20" />
-          <Property Name="Tel2" Type="nvarchar" MaxLength="20" />
-          <Property Name="Fax" Type="nvarchar" MaxLength="20" />
-          <Property Name="MobilePhone" Type="nvarchar" MaxLength="10" />
-          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastDeliveryDate" Type="date" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="150" />
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContactInfo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityType Name="Transfer">
+        <EntityType Name="UserActivities">
           <Key>
-            <PropertyRef Name="TransferID" />
+            <PropertyRef Name="ActivityID" />
           </Key>
-          <Property Name="TransferID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="TransferDate" Type="date" Nullable="false" />
-          <Property Name="TransferType" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="30" />
-          <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="150" />
+          <Property Name="ActivityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="InventoryID" Type="int" />
+          <Property Name="Action" Type="nvarchar" MaxLength="255" />
+          <Property Name="ActionDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="TransferDetails">
+        <EntityType Name="UserLogs">
           <Key>
-            <PropertyRef Name="TransferID" />
-            <PropertyRef Name="TransferSeq" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="TransferID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="TransferSeq" Type="tinyint" Nullable="false" />
-          <Property Name="ProductID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserAuthority">
-          <Key>
-            <PropertyRef Name="EmployeeNo" />
-            <PropertyRef Name="ProgramsID" />
-          </Key>
-          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="ProgramsID" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="Run" Type="bit" />
-          <Property Name="Append" Type="bit" />
-          <Property Name="Edit" Type="bit" />
-          <Property Name="Report" Type="bit" />
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActionDate" Type="datetime" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
-            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRoleID" />
           </Key>
-          <Property Name="UserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="LastLoginDate" Type="datetime" />
-          <Property Name="ChangeDate" Type="datetime" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="LastLogin" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="IsApproved" Type="bit" />
         </EntityType>
-        <EntityType Name="XINUser">
+        <EntityType Name="WarehouseLocation">
           <Key>
-            <PropertyRef Name="EmployeeNo" />
+            <PropertyRef Name="LocationID" />
           </Key>
-          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="EmployeeName" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="PasswordCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Delivery__Custom__3B75D760">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+        <Association Name="FK__Inventory__Creat__57DD0BE4">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Delivery">
-              <PropertyRef Name="CustomerID" />
+            <Dependent Role="Inventory">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Receipt__Supplie__6383C8BA">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+        <Association Name="FK__Inventory__Mater__5224328E">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventory__Updat__58D1301D">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventory__Wareh__51300E55">
+          <End Role="WarehouseLocation" Type="Self.WarehouseLocation" Multiplicity="0..1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarehouseLocation">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="WarehouseLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--產生期間發現錯誤:
+警告 6035: 關聯性 'FK__StockIn__ItemCod__56E8E7AB' 在主要端上，有不屬於資料表索引鍵的資料行。已排除此關聯性。
+        <Association Name="FK__StockIn__ItemCod__56E8E7AB" />-->
+        <Association Name="FK__StockIn__Supplie__55F4C372">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
               <PropertyRef Name="SupplierID" />
             </Principal>
-            <Dependent Role="Receipt">
+            <Dependent Role="StockIn">
               <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ReceiptDe__Recei__693CA210">
-          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1" />
-          <End Role="ReceiptDetails" Type="Self.ReceiptDetails" Multiplicity="*" />
+        <Association Name="FK__UserActiv__Inven__5D95E53A">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+          <End Role="UserActivities" Type="Self.UserActivities" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Receipt">
-              <PropertyRef Name="ReceiptID" />
+            <Principal Role="Inventory">
+              <PropertyRef Name="InventoryID" />
             </Principal>
-            <Dependent Role="ReceiptDetails">
-              <PropertyRef Name="ReceiptID" />
+            <Dependent Role="UserActivities">
+              <PropertyRef Name="InventoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TransferD__Trans__73BA3083">
-          <End Role="Transfer" Type="Self.Transfer" Multiplicity="1" />
-          <End Role="TransferDetails" Type="Self.TransferDetails" Multiplicity="*" />
+        <Association Name="FK__UserActiv__UserI__5CA1C101">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserActivities" Type="Self.UserActivities" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Transfer">
-              <PropertyRef Name="TransferID" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="TransferDetails">
-              <PropertyRef Name="TransferID" />
+            <Dependent Role="UserActivities">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserAutho__Emplo__151B244E">
-          <End Role="XINUser" Type="Self.XINUser" Multiplicity="1" />
-          <End Role="UserAuthority" Type="Self.UserAuthority" Multiplicity="*" />
+        <Association Name="FK__UserLogs__UserID__3C34F16F">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserLogs" Type="Self.UserLogs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="XINUser">
-              <PropertyRef Name="EmployeeNo" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="UserAuthority">
-              <PropertyRef Name="EmployeeNo" />
+            <Dependent Role="UserLogs">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserAutho__Progr__160F4887">
-          <End Role="Programs" Type="Self.Programs" Multiplicity="1" />
-          <End Role="UserAuthority" Type="Self.UserAuthority" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Programs">
-              <PropertyRef Name="ProgramsID" />
-            </Principal>
-            <Dependent Role="UserAuthority">
-              <PropertyRef Name="ProgramsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserRoles__RoleI__3587F3E0">
+        <Association Name="FK__UserRoles__RoleI__3864608B">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
-              <PropertyRef Name="RoleId" />
+              <PropertyRef Name="RoleID" />
             </Principal>
             <Dependent Role="UserRoles">
-              <PropertyRef Name="RoleId" />
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__UserI__3493CFA7">
+        <Association Name="FK__UserRoles__UserI__37703C52">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="UserRoles">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TISS_WMSModelStoreContainer">
+          <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DeliveryDetails" EntityType="Self.DeliveryDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PasswordResetRequests" EntityType="Self.PasswordResetRequests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Programs" EntityType="Self.Programs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ReceiptDetails" EntityType="Self.ReceiptDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Transfer" EntityType="Self.Transfer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TransferDetails" EntityType="Self.TransferDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserAuthority" EntityType="Self.UserAuthority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserActivities" EntityType="Self.UserActivities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogs" EntityType="Self.UserLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="XINUser" EntityType="Self.XINUser" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Delivery__Custom__3B75D760" Association="Self.FK__Delivery__Custom__3B75D760">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Delivery" EntitySet="Delivery" />
+          <EntitySet Name="WarehouseLocation" EntityType="Self.WarehouseLocation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Inventory__Creat__57DD0BE4" Association="Self.FK__Inventory__Creat__57DD0BE4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
-          <AssociationSet Name="FK__Receipt__Supplie__6383C8BA" Association="Self.FK__Receipt__Supplie__6383C8BA">
+          <AssociationSet Name="FK__Inventory__Mater__5224328E" Association="Self.FK__Inventory__Mater__5224328E">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventory__Updat__58D1301D" Association="Self.FK__Inventory__Updat__58D1301D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventory__Wareh__51300E55" Association="Self.FK__Inventory__Wareh__51300E55">
+            <End Role="WarehouseLocation" EntitySet="WarehouseLocation" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StockIn__Supplie__55F4C372" Association="Self.FK__StockIn__Supplie__55F4C372">
             <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="StockIn" EntitySet="StockIn" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReceiptDe__Recei__693CA210" Association="Self.FK__ReceiptDe__Recei__693CA210">
-            <End Role="Receipt" EntitySet="Receipt" />
-            <End Role="ReceiptDetails" EntitySet="ReceiptDetails" />
+          <AssociationSet Name="FK__UserActiv__Inven__5D95E53A" Association="Self.FK__UserActiv__Inven__5D95E53A">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="UserActivities" EntitySet="UserActivities" />
           </AssociationSet>
-          <AssociationSet Name="FK__TransferD__Trans__73BA3083" Association="Self.FK__TransferD__Trans__73BA3083">
-            <End Role="Transfer" EntitySet="Transfer" />
-            <End Role="TransferDetails" EntitySet="TransferDetails" />
+          <AssociationSet Name="FK__UserActiv__UserI__5CA1C101" Association="Self.FK__UserActiv__UserI__5CA1C101">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserActivities" EntitySet="UserActivities" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserAutho__Emplo__151B244E" Association="Self.FK__UserAutho__Emplo__151B244E">
-            <End Role="XINUser" EntitySet="XINUser" />
-            <End Role="UserAuthority" EntitySet="UserAuthority" />
+          <AssociationSet Name="FK__UserLogs__UserID__3C34F16F" Association="Self.FK__UserLogs__UserID__3C34F16F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogs" EntitySet="UserLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserAutho__Progr__160F4887" Association="Self.FK__UserAutho__Progr__160F4887">
-            <End Role="Programs" EntitySet="Programs" />
-            <End Role="UserAuthority" EntitySet="UserAuthority" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__RoleI__3587F3E0" Association="Self.FK__UserRoles__RoleI__3587F3E0">
+          <AssociationSet Name="FK__UserRoles__RoleI__3864608B" Association="Self.FK__UserRoles__RoleI__3864608B">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__UserI__3493CFA7" Association="Self.FK__UserRoles__UserI__3493CFA7">
+          <AssociationSet Name="FK__UserRoles__UserI__37703C52" Association="Self.FK__UserRoles__UserI__37703C52">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
@@ -362,370 +309,318 @@
     <edmx:ConceptualModels>
       <Schema Namespace="TISS_WMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TISS_WMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActivityLog" EntityType="TISS_WMSModel.ActivityLog" />
           <EntitySet Name="Customer" EntityType="TISS_WMSModel.Customer" />
-          <EntitySet Name="Delivery" EntityType="TISS_WMSModel.Delivery" />
-          <EntitySet Name="DeliveryDetails" EntityType="TISS_WMSModel.DeliveryDetails" />
-          <EntitySet Name="InternalEmployees" EntityType="TISS_WMSModel.InternalEmployees" />
-          <EntitySet Name="PasswordResetRequests" EntityType="TISS_WMSModel.PasswordResetRequests" />
-          <EntitySet Name="Product" EntityType="TISS_WMSModel.Product" />
-          <EntitySet Name="Programs" EntityType="TISS_WMSModel.Programs" />
-          <EntitySet Name="Receipt" EntityType="TISS_WMSModel.Receipt" />
-          <EntitySet Name="ReceiptDetails" EntityType="TISS_WMSModel.ReceiptDetails" />
+          <EntitySet Name="Inventory" EntityType="TISS_WMSModel.Inventory" />
+          <EntitySet Name="Material" EntityType="TISS_WMSModel.Material" />
           <EntitySet Name="Roles" EntityType="TISS_WMSModel.Roles" />
+          <EntitySet Name="StockIn" EntityType="TISS_WMSModel.StockIn" />
           <EntitySet Name="Supplier" EntityType="TISS_WMSModel.Supplier" />
-          <EntitySet Name="Transfer" EntityType="TISS_WMSModel.Transfer" />
-          <EntitySet Name="TransferDetails" EntityType="TISS_WMSModel.TransferDetails" />
-          <EntitySet Name="UserAuthority" EntityType="TISS_WMSModel.UserAuthority" />
+          <EntitySet Name="UserActivities" EntityType="TISS_WMSModel.UserActivities" />
+          <EntitySet Name="UserLogs" EntityType="TISS_WMSModel.UserLogs" />
           <EntitySet Name="UserRoles" EntityType="TISS_WMSModel.UserRoles" />
           <EntitySet Name="Users" EntityType="TISS_WMSModel.Users" />
-          <EntitySet Name="XINUser" EntityType="TISS_WMSModel.XINUser" />
-          <AssociationSet Name="FK__Delivery__Custom__3B75D760" Association="TISS_WMSModel.FK__Delivery__Custom__3B75D760">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Delivery" EntitySet="Delivery" />
+          <EntitySet Name="WarehouseLocation" EntityType="TISS_WMSModel.WarehouseLocation" />
+          <AssociationSet Name="FK__Inventory__Creat__57DD0BE4" Association="TISS_WMSModel.FK__Inventory__Creat__57DD0BE4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserAutho__Progr__160F4887" Association="TISS_WMSModel.FK__UserAutho__Progr__160F4887">
-            <End Role="Programs" EntitySet="Programs" />
-            <End Role="UserAuthority" EntitySet="UserAuthority" />
+          <AssociationSet Name="FK__Inventory__Mater__5224328E" Association="TISS_WMSModel.FK__Inventory__Mater__5224328E">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
-          <AssociationSet Name="FK__Receipt__Supplie__6383C8BA" Association="TISS_WMSModel.FK__Receipt__Supplie__6383C8BA">
-            <End Role="Supplier" EntitySet="Supplier" />
-            <End Role="Receipt" EntitySet="Receipt" />
+          <AssociationSet Name="FK__Inventory__Updat__58D1301D" Association="TISS_WMSModel.FK__Inventory__Updat__58D1301D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReceiptDe__Recei__693CA210" Association="TISS_WMSModel.FK__ReceiptDe__Recei__693CA210">
-            <End Role="Receipt" EntitySet="Receipt" />
-            <End Role="ReceiptDetails" EntitySet="ReceiptDetails" />
+          <AssociationSet Name="FK__Inventory__Wareh__51300E55" Association="TISS_WMSModel.FK__Inventory__Wareh__51300E55">
+            <End Role="WarehouseLocation" EntitySet="WarehouseLocation" />
+            <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__RoleI__3587F3E0" Association="TISS_WMSModel.FK__UserRoles__RoleI__3587F3E0">
+          <AssociationSet Name="FK__UserActiv__Inven__5D95E53A" Association="TISS_WMSModel.FK__UserActiv__Inven__5D95E53A">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="UserActivities" EntitySet="UserActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__3864608B" Association="TISS_WMSModel.FK__UserRoles__RoleI__3864608B">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__TransferD__Trans__73BA3083" Association="TISS_WMSModel.FK__TransferD__Trans__73BA3083">
-            <End Role="Transfer" EntitySet="Transfer" />
-            <End Role="TransferDetails" EntitySet="TransferDetails" />
+          <AssociationSet Name="FK__StockIn__Supplie__55F4C372" Association="TISS_WMSModel.FK__StockIn__Supplie__55F4C372">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="StockIn" EntitySet="StockIn" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserAutho__Emplo__151B244E" Association="TISS_WMSModel.FK__UserAutho__Emplo__151B244E">
-            <End Role="XINUser" EntitySet="XINUser" />
-            <End Role="UserAuthority" EntitySet="UserAuthority" />
+          <AssociationSet Name="FK__UserActiv__UserI__5CA1C101" Association="TISS_WMSModel.FK__UserActiv__UserI__5CA1C101">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserActivities" EntitySet="UserActivities" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserRoles__UserI__3493CFA7" Association="TISS_WMSModel.FK__UserRoles__UserI__3493CFA7">
+          <AssociationSet Name="FK__UserLogs__UserID__3C34F16F" Association="TISS_WMSModel.FK__UserLogs__UserID__3C34F16F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogs" EntitySet="UserLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__UserI__37703C52" Association="TISS_WMSModel.FK__UserRoles__UserI__37703C52">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PerformedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PerformedOn" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
           </Key>
-          <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="AttribName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EarNO" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="JoinMan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Tel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Tel2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MobilePhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastDeliveryDate" Type="DateTime" Precision="0" />
-          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Delivery" Relationship="TISS_WMSModel.FK__Delivery__Custom__3B75D760" FromRole="Customer" ToRole="Delivery" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContactInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Delivery">
+        <EntityType Name="Inventory">
           <Key>
-            <PropertyRef Name="DeliveryID" />
+            <PropertyRef Name="InventoryID" />
           </Key>
-          <Property Name="DeliveryID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="JoinMan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="InvoiceNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="SubTotal" Type="Int32" Nullable="false" />
-          <Property Name="ValueAddTax" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="ShipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customer" Relationship="TISS_WMSModel.FK__Delivery__Custom__3B75D760" FromRole="Delivery" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="DeliveryDetails">
-          <Key>
-            <PropertyRef Name="DeliveryID" />
-            <PropertyRef Name="DeliverySeq" />
-          </Key>
-          <Property Name="DeliveryID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="DeliverySeq" Type="Byte" Nullable="false" />
-          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseLocationID" Type="Int32" />
+          <Property Name="MaterialID" Type="Int32" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="TISS_WMSModel.FK__Inventory__Creat__57DD0BE4" FromRole="Inventory" ToRole="Users" />
+          <NavigationProperty Name="Material" Relationship="TISS_WMSModel.FK__Inventory__Mater__5224328E" FromRole="Inventory" ToRole="Material" />
+          <NavigationProperty Name="Users1" Relationship="TISS_WMSModel.FK__Inventory__Updat__58D1301D" FromRole="Inventory" ToRole="Users" />
+          <NavigationProperty Name="WarehouseLocation" Relationship="TISS_WMSModel.FK__Inventory__Wareh__51300E55" FromRole="Inventory" ToRole="WarehouseLocation" />
+          <NavigationProperty Name="UserActivities" Relationship="TISS_WMSModel.FK__UserActiv__Inven__5D95E53A" FromRole="Inventory" ToRole="UserActivities" />
         </EntityType>
-        <EntityType Name="InternalEmployees">
+        <EntityType Name="Material">
           <Key>
-            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="MaterialID" />
           </Key>
-          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="IsRegistered" Type="Boolean" />
-          <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PasswordResetRequests">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Token" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="changeDate" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="ProductID" />
-          </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Unit" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="LastReceiptDate" Type="DateTime" Precision="0" />
-          <Property Name="LastDeliveryDate" Type="DateTime" Precision="0" />
-          <Property Name="StopSales" Type="Boolean" Nullable="false" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="Stock" Type="Int32" Nullable="false" />
-          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Programs">
-          <Key>
-            <PropertyRef Name="ProgramsID" />
-          </Key>
-          <Property Name="ProgramsID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ProgramsName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserAuthority" Relationship="TISS_WMSModel.FK__UserAutho__Progr__160F4887" FromRole="Programs" ToRole="UserAuthority" />
-        </EntityType>
-        <EntityType Name="Receipt">
-          <Key>
-            <PropertyRef Name="ReceiptID" />
-          </Key>
-          <Property Name="ReceiptID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SupplierID" Type="Int32" Nullable="false" />
-          <Property Name="ReceiptType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="InvoiceNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="SubTotal" Type="Int32" Nullable="false" />
-          <Property Name="ValueAddTax" Type="Int32" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="ShipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Supplier" Relationship="TISS_WMSModel.FK__Receipt__Supplie__6383C8BA" FromRole="Receipt" ToRole="Supplier" />
-          <NavigationProperty Name="ReceiptDetails" Relationship="TISS_WMSModel.FK__ReceiptDe__Recei__693CA210" FromRole="Receipt" ToRole="ReceiptDetails" />
-        </EntityType>
-        <EntityType Name="ReceiptDetails">
-          <Key>
-            <PropertyRef Name="ReceiptID" />
-            <PropertyRef Name="ReceiptSeq" />
-          </Key>
-          <Property Name="ReceiptID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ReceiptSeq" Type="Byte" Nullable="false" />
-          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Receipt" Relationship="TISS_WMSModel.FK__ReceiptDe__Recei__693CA210" FromRole="ReceiptDetails" ToRole="Receipt" />
+          <Property Name="MaterialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inventory" Relationship="TISS_WMSModel.FK__Inventory__Mater__5224328E" FromRole="Material" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserRoles" Relationship="TISS_WMSModel.FK__UserRoles__RoleI__3587F3E0" FromRole="Roles" ToRole="UserRoles" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRoles" Relationship="TISS_WMSModel.FK__UserRoles__RoleI__3864608B" FromRole="Roles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="StockIn">
+          <Key>
+            <PropertyRef Name="StockInID" />
+          </Key>
+          <Property Name="StockInID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ReceivedDate" Type="DateTime" Precision="3" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Supplier" Relationship="TISS_WMSModel.FK__StockIn__Supplie__55F4C372" FromRole="StockIn" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierID" />
           </Key>
-          <Property Name="SupplierID" Type="Int32" Nullable="false" />
-          <Property Name="AttribName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EarNO" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="JoinMan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Tel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Tel2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MobilePhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastDeliveryDate" Type="DateTime" Precision="0" />
-          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Receipt" Relationship="TISS_WMSModel.FK__Receipt__Supplie__6383C8BA" FromRole="Supplier" ToRole="Receipt" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContactInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StockIn" Relationship="TISS_WMSModel.FK__StockIn__Supplie__55F4C372" FromRole="Supplier" ToRole="StockIn" />
         </EntityType>
-        <EntityType Name="Transfer">
+        <EntityType Name="UserActivities">
           <Key>
-            <PropertyRef Name="TransferID" />
+            <PropertyRef Name="ActivityID" />
           </Key>
-          <Property Name="TransferID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TransferDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TransferType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TransferDetails" Relationship="TISS_WMSModel.FK__TransferD__Trans__73BA3083" FromRole="Transfer" ToRole="TransferDetails" />
+          <Property Name="ActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="InventoryID" Type="Int32" />
+          <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ActionDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Inventory" Relationship="TISS_WMSModel.FK__UserActiv__Inven__5D95E53A" FromRole="UserActivities" ToRole="Inventory" />
+          <NavigationProperty Name="Users" Relationship="TISS_WMSModel.FK__UserActiv__UserI__5CA1C101" FromRole="UserActivities" ToRole="Users" />
         </EntityType>
-        <EntityType Name="TransferDetails">
+        <EntityType Name="UserLogs">
           <Key>
-            <PropertyRef Name="TransferID" />
-            <PropertyRef Name="TransferSeq" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="TransferID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TransferSeq" Type="Byte" Nullable="false" />
-          <Property Name="ProductID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Transfer" Relationship="TISS_WMSModel.FK__TransferD__Trans__73BA3083" FromRole="TransferDetails" ToRole="Transfer" />
-        </EntityType>
-        <EntityType Name="UserAuthority">
-          <Key>
-            <PropertyRef Name="EmployeeNo" />
-            <PropertyRef Name="ProgramsID" />
-          </Key>
-          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ProgramsID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Run" Type="Boolean" />
-          <Property Name="Append" Type="Boolean" />
-          <Property Name="Edit" Type="Boolean" />
-          <Property Name="Report" Type="Boolean" />
-          <NavigationProperty Name="Programs" Relationship="TISS_WMSModel.FK__UserAutho__Progr__160F4887" FromRole="UserAuthority" ToRole="Programs" />
-          <NavigationProperty Name="XINUser" Relationship="TISS_WMSModel.FK__UserAutho__Emplo__151B244E" FromRole="UserAuthority" ToRole="XINUser" />
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionDate" Type="DateTime" Precision="3" />
+          <Property Name="IPAddress" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="TISS_WMSModel.FK__UserLogs__UserID__3C34F16F" FromRole="UserLogs" ToRole="Users" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
-            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserRoleID" />
           </Key>
-          <Property Name="UserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Roles" Relationship="TISS_WMSModel.FK__UserRoles__RoleI__3587F3E0" FromRole="UserRoles" ToRole="Roles" />
-          <NavigationProperty Name="Users" Relationship="TISS_WMSModel.FK__UserRoles__UserI__3493CFA7" FromRole="UserRoles" ToRole="Users" />
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="TISS_WMSModel.FK__UserRoles__RoleI__3864608B" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="Users" Relationship="TISS_WMSModel.FK__UserRoles__UserI__37703C52" FromRole="UserRoles" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
-          <Property Name="ChangeDate" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
-          <Property Name="IsApproved" Type="Boolean" />
-          <NavigationProperty Name="UserRoles" Relationship="TISS_WMSModel.FK__UserRoles__UserI__3493CFA7" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="Inventory" Relationship="TISS_WMSModel.FK__Inventory__Creat__57DD0BE4" FromRole="Users" ToRole="Inventory" />
+          <NavigationProperty Name="Inventory1" Relationship="TISS_WMSModel.FK__Inventory__Updat__58D1301D" FromRole="Users" ToRole="Inventory" />
+          <NavigationProperty Name="UserActivities" Relationship="TISS_WMSModel.FK__UserActiv__UserI__5CA1C101" FromRole="Users" ToRole="UserActivities" />
+          <NavigationProperty Name="UserLogs" Relationship="TISS_WMSModel.FK__UserLogs__UserID__3C34F16F" FromRole="Users" ToRole="UserLogs" />
+          <NavigationProperty Name="UserRoles" Relationship="TISS_WMSModel.FK__UserRoles__UserI__37703C52" FromRole="Users" ToRole="UserRoles" />
         </EntityType>
-        <EntityType Name="XINUser">
+        <EntityType Name="WarehouseLocation">
           <Key>
-            <PropertyRef Name="EmployeeNo" />
+            <PropertyRef Name="LocationID" />
           </Key>
-          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserAuthority" Relationship="TISS_WMSModel.FK__UserAutho__Emplo__151B244E" FromRole="XINUser" ToRole="UserAuthority" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inventory" Relationship="TISS_WMSModel.FK__Inventory__Wareh__51300E55" FromRole="WarehouseLocation" ToRole="Inventory" />
         </EntityType>
-        <Association Name="FK__Delivery__Custom__3B75D760">
-          <End Type="TISS_WMSModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="TISS_WMSModel.Delivery" Role="Delivery" Multiplicity="*" />
+        <Association Name="FK__Inventory__Creat__57DD0BE4">
+          <End Type="TISS_WMSModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="TISS_WMSModel.Inventory" Role="Inventory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Delivery">
-              <PropertyRef Name="CustomerID" />
+            <Dependent Role="Inventory">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserAutho__Progr__160F4887">
-          <End Type="TISS_WMSModel.Programs" Role="Programs" Multiplicity="1" />
-          <End Type="TISS_WMSModel.UserAuthority" Role="UserAuthority" Multiplicity="*" />
+        <Association Name="FK__Inventory__Mater__5224328E">
+          <End Type="TISS_WMSModel.Material" Role="Material" Multiplicity="0..1" />
+          <End Type="TISS_WMSModel.Inventory" Role="Inventory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Programs">
-              <PropertyRef Name="ProgramsID" />
+            <Principal Role="Material">
+              <PropertyRef Name="MaterialID" />
             </Principal>
-            <Dependent Role="UserAuthority">
-              <PropertyRef Name="ProgramsID" />
+            <Dependent Role="Inventory">
+              <PropertyRef Name="MaterialID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Receipt__Supplie__6383C8BA">
-          <End Type="TISS_WMSModel.Supplier" Role="Supplier" Multiplicity="1" />
-          <End Type="TISS_WMSModel.Receipt" Role="Receipt" Multiplicity="*" />
+        <Association Name="FK__Inventory__Updat__58D1301D">
+          <End Type="TISS_WMSModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="TISS_WMSModel.Inventory" Role="Inventory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="SupplierID" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Receipt">
-              <PropertyRef Name="SupplierID" />
+            <Dependent Role="Inventory">
+              <PropertyRef Name="UpdatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ReceiptDe__Recei__693CA210">
-          <End Type="TISS_WMSModel.Receipt" Role="Receipt" Multiplicity="1" />
-          <End Type="TISS_WMSModel.ReceiptDetails" Role="ReceiptDetails" Multiplicity="*" />
+        <Association Name="FK__Inventory__Wareh__51300E55">
+          <End Type="TISS_WMSModel.WarehouseLocation" Role="WarehouseLocation" Multiplicity="0..1" />
+          <End Type="TISS_WMSModel.Inventory" Role="Inventory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Receipt">
-              <PropertyRef Name="ReceiptID" />
+            <Principal Role="WarehouseLocation">
+              <PropertyRef Name="LocationID" />
             </Principal>
-            <Dependent Role="ReceiptDetails">
-              <PropertyRef Name="ReceiptID" />
+            <Dependent Role="Inventory">
+              <PropertyRef Name="WarehouseLocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__RoleI__3587F3E0">
+        <Association Name="FK__UserActiv__Inven__5D95E53A">
+          <End Type="TISS_WMSModel.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <End Type="TISS_WMSModel.UserActivities" Role="UserActivities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="InventoryID" />
+            </Principal>
+            <Dependent Role="UserActivities">
+              <PropertyRef Name="InventoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__3864608B">
           <End Type="TISS_WMSModel.Roles" Role="Roles" Multiplicity="1" />
           <End Type="TISS_WMSModel.UserRoles" Role="UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
-              <PropertyRef Name="RoleId" />
+              <PropertyRef Name="RoleID" />
             </Principal>
             <Dependent Role="UserRoles">
-              <PropertyRef Name="RoleId" />
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TransferD__Trans__73BA3083">
-          <End Type="TISS_WMSModel.Transfer" Role="Transfer" Multiplicity="1" />
-          <End Type="TISS_WMSModel.TransferDetails" Role="TransferDetails" Multiplicity="*" />
+        <Association Name="FK__StockIn__Supplie__55F4C372">
+          <End Type="TISS_WMSModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="TISS_WMSModel.StockIn" Role="StockIn" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Transfer">
-              <PropertyRef Name="TransferID" />
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
             </Principal>
-            <Dependent Role="TransferDetails">
-              <PropertyRef Name="TransferID" />
+            <Dependent Role="StockIn">
+              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserAutho__Emplo__151B244E">
-          <End Type="TISS_WMSModel.XINUser" Role="XINUser" Multiplicity="1" />
-          <End Type="TISS_WMSModel.UserAuthority" Role="UserAuthority" Multiplicity="*" />
+        <Association Name="FK__UserActiv__UserI__5CA1C101">
+          <End Type="TISS_WMSModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="TISS_WMSModel.UserActivities" Role="UserActivities" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="XINUser">
-              <PropertyRef Name="EmployeeNo" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="UserAuthority">
-              <PropertyRef Name="EmployeeNo" />
+            <Dependent Role="UserActivities">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserRoles__UserI__3493CFA7">
+        <Association Name="FK__UserLogs__UserID__3C34F16F">
+          <End Type="TISS_WMSModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="TISS_WMSModel.UserLogs" Role="UserLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserLogs">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__UserI__37703C52">
           <End Type="TISS_WMSModel.Users" Role="Users" Multiplicity="1" />
           <End Type="TISS_WMSModel.UserRoles" Role="UserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="UserRoles">
-              <PropertyRef Name="UserId" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -735,126 +630,51 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TISS_WMSModelStoreContainer" CdmEntityContainer="TISS_WMSEntities">
+          <EntitySetMapping Name="ActivityLog">
+            <EntityTypeMapping TypeName="TISS_WMSModel.ActivityLog">
+              <MappingFragment StoreEntitySet="ActivityLog">
+                <ScalarProperty Name="PerformedOn" ColumnName="PerformedOn" />
+                <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="TISS_WMSModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="LastDeliveryDate" ColumnName="LastDeliveryDate" />
-                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
-                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Tel2" ColumnName="Tel2" />
-                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
-                <ScalarProperty Name="JoinMan" ColumnName="JoinMan" />
-                <ScalarProperty Name="EarNO" ColumnName="EarNO" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="AttribName" ColumnName="AttribName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Delivery">
-            <EntityTypeMapping TypeName="TISS_WMSModel.Delivery">
-              <MappingFragment StoreEntitySet="Delivery">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ValueAddTax" ColumnName="ValueAddTax" />
-                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
-                <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
-                <ScalarProperty Name="JoinMan" ColumnName="JoinMan" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DeliveryDetails">
-            <EntityTypeMapping TypeName="TISS_WMSModel.DeliveryDetails">
-              <MappingFragment StoreEntitySet="DeliveryDetails">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <EntitySetMapping Name="Inventory">
+            <EntityTypeMapping TypeName="TISS_WMSModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="WarehouseLocationID" ColumnName="WarehouseLocationID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="DeliverySeq" ColumnName="DeliverySeq" />
-                <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InternalEmployees">
-            <EntityTypeMapping TypeName="TISS_WMSModel.InternalEmployees">
-              <MappingFragment StoreEntitySet="InternalEmployees">
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PasswordResetRequests">
-            <EntityTypeMapping TypeName="TISS_WMSModel.PasswordResetRequests">
-              <MappingFragment StoreEntitySet="PasswordResetRequests">
-                <ScalarProperty Name="changeDate" ColumnName="changeDate" />
-                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="TISS_WMSModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="StopSales" ColumnName="StopSales" />
-                <ScalarProperty Name="LastDeliveryDate" ColumnName="LastDeliveryDate" />
-                <ScalarProperty Name="LastReceiptDate" ColumnName="LastReceiptDate" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Programs">
-            <EntityTypeMapping TypeName="TISS_WMSModel.Programs">
-              <MappingFragment StoreEntitySet="Programs">
-                <ScalarProperty Name="ProgramsName" ColumnName="ProgramsName" />
-                <ScalarProperty Name="ProgramsID" ColumnName="ProgramsID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Receipt">
-            <EntityTypeMapping TypeName="TISS_WMSModel.Receipt">
-              <MappingFragment StoreEntitySet="Receipt">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ValueAddTax" ColumnName="ValueAddTax" />
-                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
-                <ScalarProperty Name="ReceiptType" ColumnName="ReceiptType" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
-                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReceiptDetails">
-            <EntityTypeMapping TypeName="TISS_WMSModel.ReceiptDetails">
-              <MappingFragment StoreEntitySet="ReceiptDetails">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ReceiptSeq" ColumnName="ReceiptSeq" />
-                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="TISS_WMSModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MaterialType" ColumnName="MaterialType" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -862,94 +682,85 @@
             <EntityTypeMapping TypeName="TISS_WMSModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockIn">
+            <EntityTypeMapping TypeName="TISS_WMSModel.StockIn">
+              <MappingFragment StoreEntitySet="StockIn">
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="StockInID" ColumnName="StockInID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Supplier">
             <EntityTypeMapping TypeName="TISS_WMSModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="LastDeliveryDate" ColumnName="LastDeliveryDate" />
-                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
-                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
-                <ScalarProperty Name="Tel2" ColumnName="Tel2" />
-                <ScalarProperty Name="Tel1" ColumnName="Tel1" />
-                <ScalarProperty Name="JoinMan" ColumnName="JoinMan" />
-                <ScalarProperty Name="EarNO" ColumnName="EarNO" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="AttribName" ColumnName="AttribName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Transfer">
-            <EntityTypeMapping TypeName="TISS_WMSModel.Transfer">
-              <MappingFragment StoreEntitySet="Transfer">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TransferType" ColumnName="TransferType" />
-                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
-                <ScalarProperty Name="TransferID" ColumnName="TransferID" />
+          <EntitySetMapping Name="UserActivities">
+            <EntityTypeMapping TypeName="TISS_WMSModel.UserActivities">
+              <MappingFragment StoreEntitySet="UserActivities">
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TransferDetails">
-            <EntityTypeMapping TypeName="TISS_WMSModel.TransferDetails">
-              <MappingFragment StoreEntitySet="TransferDetails">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="TransferSeq" ColumnName="TransferSeq" />
-                <ScalarProperty Name="TransferID" ColumnName="TransferID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserAuthority">
-            <EntityTypeMapping TypeName="TISS_WMSModel.UserAuthority">
-              <MappingFragment StoreEntitySet="UserAuthority">
-                <ScalarProperty Name="Report" ColumnName="Report" />
-                <ScalarProperty Name="Edit" ColumnName="Edit" />
-                <ScalarProperty Name="Append" ColumnName="Append" />
-                <ScalarProperty Name="Run" ColumnName="Run" />
-                <ScalarProperty Name="ProgramsID" ColumnName="ProgramsID" />
-                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <EntitySetMapping Name="UserLogs">
+            <EntityTypeMapping TypeName="TISS_WMSModel.UserLogs">
+              <MappingFragment StoreEntitySet="UserLogs">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
             <EntityTypeMapping TypeName="TISS_WMSModel.UserRoles">
               <MappingFragment StoreEntitySet="UserRoles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TISS_WMSModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
-                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="XINUser">
-            <EntityTypeMapping TypeName="TISS_WMSModel.XINUser">
-              <MappingFragment StoreEntitySet="XINUser">
-                <ScalarProperty Name="PasswordCode" ColumnName="PasswordCode" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <EntitySetMapping Name="WarehouseLocation">
+            <EntityTypeMapping TypeName="TISS_WMSModel.WarehouseLocation">
+              <MappingFragment StoreEntitySet="WarehouseLocation">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

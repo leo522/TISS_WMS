@@ -5,31 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1b0d130a6c064610b131e5e4ff653a74" Name="Diagram1" ZoomLevel="85">
-        <EntityTypeShape EntityType="TISS_WMSModel.Customer" Width="1.5" PointX="9.75" PointY="6" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Delivery" Width="1.5" PointX="12" PointY="6.25" />
-        <EntityTypeShape EntityType="TISS_WMSModel.DeliveryDetails" Width="1.5" PointX="9.75" PointY="10.75" />
-        <EntityTypeShape EntityType="TISS_WMSModel.InternalEmployees" Width="1.5" PointX="4.75" PointY="11.75" />
-        <EntityTypeShape EntityType="TISS_WMSModel.PasswordResetRequests" Width="1.5" PointX="6.75" PointY="11.75" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Product" Width="1.5" PointX="11.75" PointY="10.75" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Programs" Width="1.5" PointX="2.75" PointY="4.375" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Receipt" Width="1.5" PointX="10" PointY="1.25" />
-        <EntityTypeShape EntityType="TISS_WMSModel.ReceiptDetails" Width="1.5" PointX="12.25" PointY="1.625" />
+        <EntityTypeShape EntityType="TISS_WMSModel.ActivityLog" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TISS_WMSModel.Customer" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="TISS_WMSModel.Inventory" Width="1.5" PointX="6" PointY="4" />
+        <EntityTypeShape EntityType="TISS_WMSModel.Material" Width="1.5" PointX="3.75" PointY="8.25" />
         <EntityTypeShape EntityType="TISS_WMSModel.Roles" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Supplier" Width="1.5" PointX="7.75" PointY="1" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Transfer" Width="1.5" PointX="4.75" PointY="8" />
-        <EntityTypeShape EntityType="TISS_WMSModel.TransferDetails" Width="1.5" PointX="7" PointY="8" />
-        <EntityTypeShape EntityType="TISS_WMSModel.UserAuthority" Width="1.5" PointX="5" PointY="4" />
-        <EntityTypeShape EntityType="TISS_WMSModel.UserRoles" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="TISS_WMSModel.Users" Width="1.5" PointX="0.75" PointY="5.5" />
-        <EntityTypeShape EntityType="TISS_WMSModel.XINUser" Width="1.5" PointX="2.75" PointY="9.375" />
-        <AssociationConnector Association="TISS_WMSModel.FK__Delivery__Custom__3B75D760" />
-        <AssociationConnector Association="TISS_WMSModel.FK__UserAutho__Progr__160F4887" />
-        <AssociationConnector Association="TISS_WMSModel.FK__Receipt__Supplie__6383C8BA" />
-        <AssociationConnector Association="TISS_WMSModel.FK__ReceiptDe__Recei__693CA210" />
-        <AssociationConnector Association="TISS_WMSModel.FK__UserRoles__RoleI__3587F3E0" />
-        <AssociationConnector Association="TISS_WMSModel.FK__TransferD__Trans__73BA3083" />
-        <AssociationConnector Association="TISS_WMSModel.FK__UserAutho__Emplo__151B244E" />
-        <AssociationConnector Association="TISS_WMSModel.FK__UserRoles__UserI__3493CFA7" />
+        <EntityTypeShape EntityType="TISS_WMSModel.StockIn" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="TISS_WMSModel.Supplier" Width="1.5" PointX="8.75" PointY="1.125" />
+        <EntityTypeShape EntityType="TISS_WMSModel.UserActivities" Width="1.5" PointX="8.25" PointY="4.75" />
+        <EntityTypeShape EntityType="TISS_WMSModel.UserLogs" Width="1.5" PointX="3" PointY="12.125" />
+        <EntityTypeShape EntityType="TISS_WMSModel.UserRoles" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="TISS_WMSModel.Users" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="TISS_WMSModel.WarehouseLocation" Width="1.5" PointX="3.75" PointY="1.75" />
+        <AssociationConnector Association="TISS_WMSModel.FK__Inventory__Creat__57DD0BE4" />
+        <AssociationConnector Association="TISS_WMSModel.FK__Inventory__Mater__5224328E" />
+        <AssociationConnector Association="TISS_WMSModel.FK__Inventory__Updat__58D1301D" />
+        <AssociationConnector Association="TISS_WMSModel.FK__Inventory__Wareh__51300E55" />
+        <AssociationConnector Association="TISS_WMSModel.FK__UserActiv__Inven__5D95E53A" />
+        <AssociationConnector Association="TISS_WMSModel.FK__UserRoles__RoleI__3864608B" />
+        <AssociationConnector Association="TISS_WMSModel.FK__StockIn__Supplie__55F4C372" />
+        <AssociationConnector Association="TISS_WMSModel.FK__UserActiv__UserI__5CA1C101" />
+        <AssociationConnector Association="TISS_WMSModel.FK__UserLogs__UserID__3C34F16F" />
+        <AssociationConnector Association="TISS_WMSModel.FK__UserRoles__UserI__37703C52" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

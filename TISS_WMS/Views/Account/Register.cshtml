@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = Layout = null;
+    Layout = null;
 }
 <!DOCTYPE html>
 <html>
@@ -34,25 +34,28 @@
         <div class="text-center">
             <img src="~/pic/logo.svg" alt="Logo" style="height: 45px; width: 100%;">
         </div>
-        <form action="/Tiss/Register" method="post">
+        <!-- 開始註冊表單 -->
+        <form action="/Account/Register" method="post">
+            @Html.AntiForgeryToken() <!-- 防止CSRF攻擊 -->
+
             <div class="form-group">
-                <label for="EmployeeID">職員編號</label>
-                <input type="text" class="form-control" id="EmployeeID" name="EmployeeID" placeholder="請輸入職員編號" required>
+                <label for="UserAccount">帳號</label>
+                <input type="text" class="form-control" id="UserAccount" name="UserAccount" placeholder="請輸入帳號" required>
             </div>
-            <div class="form-group">
-                <label for="Username">帳號</label>
-                <input type="text" class="form-control" id="Username" name="UserName" placeholder="請輸入帳號" required>
-            </div>
+
             <div class="form-group">
                 <label for="Password">密碼</label>
-                <input type="password" class="form-control" id="Password" name="pwd" placeholder="請輸入密碼" required>
+                <input type="password" class="form-control" id="pwd" name="pwd" placeholder="請輸入密碼" required>
             </div>
+
             <div class="form-group">
                 <label for="Email">電子郵件</label>
                 <input type="email" class="form-control" id="Email" name="Email" placeholder="請輸入電子郵件" required>
             </div>
+
             <button type="submit" class="btn btn-primary btn-block">註冊</button>
         </form>
+
         @if (ViewBag.ErrorMessage != null)
         {
             <div class="alert alert-danger" role="alert">
