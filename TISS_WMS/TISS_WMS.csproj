@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
@@ -2440,9 +2441,11 @@
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Stock\StockCreate.cshtml" />
     <Content Include="Views\Stock\StockManage.cshtml" />
+    <Content Include="Views\Main\MainHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Employees\" />
     <Folder Include="Views\Sales\" />
     <Folder Include="Views\Vender\" />
   </ItemGroup>

@@ -24,14 +24,14 @@
             <ul class="nav flex-column">
                 <!-- 基礎管理 -->
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#collapseBaseManagement" role="button" aria-expanded="false" aria-controls="collapseBaseManagement">
-                        <span><i class="fa fa-book"></i> 基礎管理</span>
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#BaseManagement" role="button" aria-expanded="false" aria-controls="BaseManagement">
+                        <span><i class="fa fa-book"></i>基礎管理</span>
                         <i class="fa fa-chevron-down"></i>
                     </a>
-                    <div class="collapse" id="collapseBaseManagement">
+                    <div class="collapse" id="BaseManagement">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="/Stock/StockManage">庫存管理</a>
+                                <a class="nav-link" href="/Stock/StockManage">倉庫管理</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">庫區管理</a>
@@ -52,15 +52,95 @@
                     </div>
                 </li>
 
-                <!-- 其他導航項目 -->
+                <!-- 業務管理 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i> 業務管理</a>
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#SalesManagement" role="button" aria-expanded="false" aria-controls="SalesManagement">
+                        <span><i class="fa fa-book"></i>業務管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="SalesManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">入庫單</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">入庫單明細</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">出庫單</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">出庫單明細</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">庫存管理</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
+
+                <!-- 採購管理 -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-home"></i> 單位組織</a>
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#PoManagement" role="button" aria-expanded="false" aria-controls="PoManagement">
+                        <span><i class="fa fa-shopping-bag"></i>採購管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+
+                    <div class="collapse" id="PoManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">採購計畫</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">採購計畫明細</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">銷售計劃</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">銷售計劃明細</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
+
+                <!--單位組織-->
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-gear"></i> 系統管理</a>
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#OrganizationManagement" role="button" aria-expanded="false" aria-controls="OrganizationManagement">
+                        <span><i class="fa fa-home"></i>基礎管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="OrganizationManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">員工管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">部門管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">職務管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!--系統管理-->
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#SysManagement" role="button" aria-expanded="false" aria-controls="SysManagement">
+                        <span><i class="fa fa-home"></i>系統管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="SysManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">權限管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">系統紀錄</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -71,6 +151,9 @@
                 <div class="right-icons">
                     <i class="fas fa-arrows-alt"></i>
                     <i class="fas fa-user"></i>
+                    <a href="/Main/MainHome">
+                        <i class="fas fa-home"></i>
+                    </a>
                 </div>
             </div>
             <div class="content-area">

@@ -11,6 +11,11 @@ namespace TISS_WMS.Controllers
     {
         private TISS_WMSEntities _db = new TISS_WMSEntities();
 
+        public ActionResult MainHome()
+        {
+            return View();
+        }
+
         public ActionResult Main()
         {
             return View();
