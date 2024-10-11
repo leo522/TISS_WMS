@@ -1,0 +1,21 @@
+name: Sync to GitLab
+
+on:
+  push:
+    branches:
+      - master  # 當推送到 master 分支時觸發
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Push to GitLab
+      run: |
+        git remote add gitlab ${{ secrets.GITLAB_REPO_URL }}
+        git push --mirror gitlab
+      env:
+        GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
