@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新增庫存</title>
+    <link href="~/css/StockCreateStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="text-center">新增庫存</h2>
+            <form action="/StockManage/StockCreate" method="POST" class="row g-3 needs-validation" novalidate>
+
+                <div class="col-md-6">
+                    <label for="itemCode" class="form-label">物品代碼</label>
+                    <input type="text" class="form-control" id="itemCode" name="ItemCode" required>
+                    <div class="invalid-feedback">
+                        請輸入物品代碼
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="itemName" class="form-label">物品名稱</label>
+                    <input type="text" class="form-control" id="itemName" name="ItemName" required>
+                    <div class="invalid-feedback">
+                        請輸入物品名稱
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="quantity" class="form-label">庫存數量</label>
+                    <input type="number" class="form-control" id="quantity" name="Quantity" min="1" required>
+                    <div class="invalid-feedback">
+                        請輸入庫存數量（至少為1）
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="warehouseLocation" class="form-label">庫位</label>
+                    <select class="form-select" id="warehouseLocation" name="WarehouseLocationID" required>
+                        <option value="" selected disabled>選擇庫位</option>
+                        <!-- 選項需從後端載入 -->
+                        <option value="1">倉庫 A</option>
+                        <option value="2">倉庫 B</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        請選擇庫位
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="material" class="form-label">物料</label>
+                    <select class="form-select" id="material" name="MaterialID" required>
+                        <option value="" selected disabled>選擇物料</option>
+                        <!-- 選項需從後端載入 -->
+                        <option value="1">物料 A</option>
+                        <option value="2">物料 B</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        請選擇物料
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">提交</button>
+                    <a href="/Stock/StockManage" class="btn btn-secondary">返回</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 表單驗證
+        (function () {
+            'use strict'
+
+            var forms = document.querySelectorAll('.needs-validation')
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>

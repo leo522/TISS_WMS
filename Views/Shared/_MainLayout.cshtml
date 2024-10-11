@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國家運動科學中心庫存管理系統</title>
+    <link rel="icon" href="~/pic/favicon.svg" />
+    <link href="~/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/MainStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="~/fontawesome/js/all.min.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- 左側導航列 -->
+        <div class="sidebar">
+            <div class="profile">
+                <img alt="image" src="~/pic/KiKi.jpg" onerror="this.src='/image/portrait.png'; this.onerror=null;" class="img-circle" height="50" width="50" />
+                <div class="name">測試員</div>
+                <div class="title">運動科學研究處</div>
+            </div>
+            <ul class="nav flex-column">
+                <!-- 基礎管理 -->
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#BaseManagement" role="button" aria-expanded="false" aria-controls="BaseManagement">
+                        <span><i class="fa fa-book"></i>基礎管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="BaseManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Stock/StockManage">倉庫管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">庫區管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">庫位管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">物料管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">供應商管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">客戶管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- 業務管理 -->
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#SalesManagement" role="button" aria-expanded="false" aria-controls="SalesManagement">
+                        <span><i class="fa fa-book"></i>業務管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="SalesManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">入庫單</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">入庫單明細</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">出庫單</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">出庫單明細</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">庫存管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- 採購管理 -->
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#PoManagement" role="button" aria-expanded="false" aria-controls="PoManagement">
+                        <span><i class="fa fa-shopping-bag"></i>採購管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+
+                    <div class="collapse" id="PoManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">採購計畫</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">採購計畫明細</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">銷售計劃</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">銷售計劃明細</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!--單位組織-->
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#OrganizationManagement" role="button" aria-expanded="false" aria-controls="OrganizationManagement">
+                        <span><i class="fa fa-home"></i>基礎管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="OrganizationManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">員工管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">部門管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">職務管理</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!--系統管理-->
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#SysManagement" role="button" aria-expanded="false" aria-controls="SysManagement">
+                        <span><i class="fa fa-home"></i>系統管理</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="SysManagement">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">權限管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">系統紀錄</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <div class="topbar">
+                <div class="right-icons">
+                    <i class="fas fa-arrows-alt"></i>
+                    <i class="fas fa-user"></i>
+                    <a href="/Main/MainHome">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="content-area">
+                @RenderBody() <!-- 這裡才是具體頁面的內容會插入的地方 -->
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 確保箭頭能夠根據展開狀態改變方向
+            var collapseElements = document.querySelectorAll('.nav-link[data-bs-toggle="collapse"]');
+
+            collapseElements.forEach(function (element) {
+                element.addEventListener('click', function () {
+                    // 找到箭頭圖標
+                    var icon = element.querySelector('i.fa-chevron-down, i.fa-chevron-up');
+                    // 防止 classList 出現錯誤的檢查
+                    if (icon) {
+                        var isCollapsed = element.getAttribute('aria-expanded') === "true";
+                        // 切換箭頭方向
+                        if (isCollapsed) {
+                            icon.classList.remove('fa-chevron-up');
+                            icon.classList.add('fa-chevron-down');
+                        } else {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

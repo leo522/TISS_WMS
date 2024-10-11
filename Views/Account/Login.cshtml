@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登入</title>
+    <link rel="icon" href="~/pic/favicon.svg" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1A2A4F;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- 註冊成功提示訊息 -->
+        @if (TempData["RegisterMessage"] != null)
+        {
+            <script type="text/javascript">
+                alert('@TempData["RegisterMessage"]');
+            </script>
+        }
+
+        <div class="text-center">
+            <img src="~/pic/logo.svg" alt="Logo" style="height: 45px; width: 100%;">
+        </div>
+
+        <!-- 登入表單 -->
+        <form action="/Account/Login" method="post">
+            @Html.AntiForgeryToken() <!-- 防止 CSRF 攻擊 -->
+
+            <div class="form-group">
+                <label for="userAccount">帳號</label>
+                <input type="text" class="form-control" id="userAccount" name="userAccount" placeholder="請輸入帳號" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd">密碼</label>
+                <input type="password" class="form-control" id="pwd" name="pwd" placeholder="請輸入密碼" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">登入</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/Account/Register">註冊帳號</a>
+        </div>
+
+        <!-- 錯誤提示區域 -->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <hr>
+
+        <div class="text-center">
+            <a href="/Account/ForgotPassword" class="btn btn-link">忘記密碼</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -2442,6 +2442,7 @@
     <Content Include="Views\Stock\StockCreate.cshtml" />
     <Content Include="Views\Stock\StockManage.cshtml" />
     <Content Include="Views\Main\MainHome.cshtml" />
+    <Content Include="Views\Stock\StockDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
