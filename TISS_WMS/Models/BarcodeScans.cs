@@ -12,15 +12,14 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserActivities
+    public partial class BarcodeScans
     {
-        public int ActivityID { get; set; }
-        public int UserID { get; set; }
-        public Nullable<int> InventoryID { get; set; }
-        public string Action { get; set; }
-        public Nullable<System.DateTime> ActionDate { get; set; }
+        public int BarcodeScanId { get; set; }
+        public string Barcode { get; set; }
+        public string ScanType { get; set; }
+        public System.DateTime ScanDate { get; set; }
+        public int ScannedByUserId { get; set; }
     
-        public virtual Inventory Inventory { get; set; }
         public virtual Users Users { get; set; }
     }
 }

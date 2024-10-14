@@ -12,14 +12,18 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserLogs
+    public partial class OutboundOrders
     {
-        public int LogID { get; set; }
-        public int UserID { get; set; }
-        public string Action { get; set; }
-        public Nullable<System.DateTime> ActionDate { get; set; }
-        public string IPAddress { get; set; }
+        public int OutboundOrderId { get; set; }
+        public int OrderId { get; set; }
+        public int WarehouseId { get; set; }
+        public System.DateTime ShippedDate { get; set; }
+        public int ShippedByUserId { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public System.DateTime UpdatedAt { get; set; }
     
+        public virtual Orders Orders { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Warehouses Warehouses { get; set; }
     }
 }

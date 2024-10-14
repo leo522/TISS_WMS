@@ -25,17 +25,14 @@ namespace TISS_WMS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ActivityLog> ActivityLog { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Inventory> Inventory { get; set; }
-        public virtual DbSet<Material> Material { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<StockIn> StockIn { get; set; }
-        public virtual DbSet<Supplier> Supplier { get; set; }
-        public virtual DbSet<UserActivities> UserActivities { get; set; }
-        public virtual DbSet<UserLogs> UserLogs { get; set; }
-        public virtual DbSet<UserRoles> UserRoles { get; set; }
+        public virtual DbSet<BarcodeScans> BarcodeScans { get; set; }
+        public virtual DbSet<Logs> Logs { get; set; }
+        public virtual DbSet<OrderItems> OrderItems { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OutboundOrders> OutboundOrders { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductStock> ProductStock { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<WarehouseLocation> WarehouseLocation { get; set; }
+        public virtual DbSet<Warehouses> Warehouses { get; set; }
     }
 }

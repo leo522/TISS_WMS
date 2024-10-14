@@ -1,0 +1,45 @@
+﻿body {
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.actions {
+    margin-bottom: 20px;
+}
+
+    .actions button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .actions .btn-add {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .actions .btn-edit {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .actions .btn-delete {
+        background-color: #dc3545;
+        color: white;
+    }
+
+table.dataTable tbody tr {
+    background-color: #f9f9f9;
+}
+
+    table.dataTable tbody tr.selected {
+        background-color: #d0e9c6;
+    }
+
+.dataTables_info {
+    margin-top: 10px;
+}

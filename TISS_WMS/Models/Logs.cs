@@ -12,12 +12,14 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ActivityLog
+    public partial class Logs
     {
-        public int LogID { get; set; }
-        public string Action { get; set; }
-        public string Description { get; set; }
-        public string PerformedBy { get; set; }
-        public Nullable<System.DateTime> PerformedOn { get; set; }
+        public int LogId { get; set; }
+        public int UserId { get; set; }
+        public string UserAction { get; set; }
+        public string Details { get; set; }
+        public System.DateTime Timestamp { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

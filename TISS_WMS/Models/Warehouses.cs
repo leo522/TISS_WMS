@@ -12,21 +12,24 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Supplier
+    public partial class Warehouses
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Supplier()
+        public Warehouses()
         {
-            this.StockIn = new HashSet<StockIn>();
+            this.OutboundOrders = new HashSet<OutboundOrders>();
+            this.ProductStock = new HashSet<ProductStock>();
         }
     
-        public int SupplierID { get; set; }
-        public string SupplierName { get; set; }
-        public string ContactInfo { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public int WarehouseId { get; set; }
+        public string WarehouseName { get; set; }
+        public string WarehouseLocation { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public System.DateTime UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockIn> StockIn { get; set; }
+        public virtual ICollection<OutboundOrders> OutboundOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductStock> ProductStock { get; set; }
     }
 }

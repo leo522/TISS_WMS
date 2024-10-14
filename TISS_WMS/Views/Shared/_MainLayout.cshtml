@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,9 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-3.7.0.min.js"></script>
     <script src="~/fontawesome/js/all.min.js"></script>
+    <script type="text/javascript">
+    @*var antiForgeryToken = '@Html.AntiForgeryToken().ToHtmlString()';*@
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -31,7 +34,7 @@
                     <div class="collapse" id="BaseManagement">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="/Stock/StockManage">倉庫管理</a>
+                                <a class="nav-link" href="#">倉庫管理</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">庫區管理</a>
@@ -61,48 +64,51 @@
                     <div class="collapse" id="SalesManagement">
                         <ul class="nav flex-column ms-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">入庫單</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">入庫單明細</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">出庫單</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">出庫單明細</a>
+                                <a class="nav-link" href="/Products/ProductList">產品列表</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">庫存管理</a>
                             </li>
+                            @*<li class="nav-item">
+                                    <a class="nav-link" href="/WarehouseReceipt/WarehouseReceipMain">入庫單</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/WarehouseReceiptList/WarehouseReceiptListMain">入庫單明細</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">出庫單</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">出庫單明細</a>
+                                </li>*@
                         </ul>
                     </div>
                 </li>
 
                 <!-- 採購管理 -->
-                <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#PoManagement" role="button" aria-expanded="false" aria-controls="PoManagement">
-                        <span><i class="fa fa-shopping-bag"></i>採購管理</span>
-                        <i class="fa fa-chevron-down"></i>
-                    </a>
+                @*<li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#PoManagement" role="button" aria-expanded="false" aria-controls="PoManagement">
+                            <span><i class="fa fa-shopping-bag"></i>採購管理</span>
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
 
-                    <div class="collapse" id="PoManagement">
-                        <ul class="nav flex-column ms-3">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">採購計畫</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">採購計畫明細</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">銷售計劃</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">銷售計劃明細</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                        <div class="collapse" id="PoManagement">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">採購計畫</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">採購計畫明細</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">銷售計劃</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">銷售計劃明細</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>*@
 
                 <!--單位組織-->
                 <li class="nav-item">
@@ -151,9 +157,6 @@
                 <div class="right-icons">
                     <i class="fas fa-arrows-alt"></i>
                     <i class="fas fa-user"></i>
-                    <a href="/Main/MainHome">
-                        <i class="fas fa-home"></i>
-                    </a>
                 </div>
             </div>
             <div class="content-area">

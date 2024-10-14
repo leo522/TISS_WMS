@@ -12,12 +12,17 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class ProductStock
     {
-        public int CustomerID { get; set; }
-        public string CustomerName { get; set; }
-        public string ContactInfo { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public int ProductStockId { get; set; }
+        public int ProductId { get; set; }
+        public int WarehouseId { get; set; }
+        public int StockChange { get; set; }
+        public int CurrentStock { get; set; }
+        public string TransactionType { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+    
+        public virtual Products Products { get; set; }
+        public virtual Warehouses Warehouses { get; set; }
     }
 }

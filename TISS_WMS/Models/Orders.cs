@@ -12,33 +12,26 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class Orders
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public Orders()
         {
-            this.BarcodeScans = new HashSet<BarcodeScans>();
-            this.Logs = new HashSet<Logs>();
-            this.Orders = new HashSet<Orders>();
+            this.OrderItems = new HashSet<OrderItems>();
             this.OutboundOrders = new HashSet<OutboundOrders>();
         }
     
-        public int UserID { get; set; }
-        public string UserAccount { get; set; }
-        public string PasswordHash { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public Nullable<System.DateTime> LastLogin { get; set; }
+        public int OrderId { get; set; }
+        public int UserId { get; set; }
+        public System.DateTime OrderDate { get; set; }
+        public string OrderStatus { get; set; }
+        public decimal TotalAmount { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
-        public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BarcodeScans> BarcodeScans { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Logs> Logs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OutboundOrders> OutboundOrders { get; set; }
     }

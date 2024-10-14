@@ -1,0 +1,109 @@
+﻿@model IEnumerable<TISS_WMS.Models.Products>
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/ProductCreateStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <div class="actions">
+        <button class="btn-add">新 增</button>
+        <button class="btn-edit">修 改</button>
+        <button class="btn-delete">刪 除</button>
+    </div>
+
+    <table id="productsTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll"></th>
+                <th>條碼</th>
+                <th>產品編號</th>
+                <th>產品描述</th>
+                <th>單位</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>備註</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr data-id="@product.ProductId">
+                    <td><input type="checkbox"></td>
+                    <td><img src="/Products/GenerateBarcodeImage?barcodeText=@product.Barcode" alt="條碼" style="width:150px;height:50px;"></td>
+                    <td>@product.ProductName</td>
+                    <td>@product.ProductDescription</td>
+                    <td>@product.Unit</td>
+                    <td>@product.StockQuantity</td>
+                    <td>@product.Price</td>
+                    <td>@product.Remark</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+    $('#productsTable').DataTable({
+        "paging": true,
+        "searching": false,
+        "info": true,
+        "lengthChange": false
+    });
+
+    // Select/Deselect all checkboxes
+    $('#selectAll').click(function () {
+        var isChecked = $(this).prop('checked');
+        $('#productsTable tbody input[type="checkbox"]').prop('checked', isChecked);
+    });
+
+    // 新增產品按鈕
+    $('.btn-add').click(function() {
+        window.location.href = '@Url.Action("ProductCreate", "Products")';
+    });
+
+    // 編輯產品按鈕
+    $('.btn-edit').click(function() {
+    var selectedProduct = $('input[type="checkbox"]:checked').closest('tr');
+    if (selectedProduct.length > 0) {
+        var productId = selectedProduct.data('id'); // 獲取產品 ID
+        window.location.href = '@Url.Action("ProductEdit", "Products", new { id = "__id__" })'.replace('__id__', productId);
+    } else {
+        alert('請選擇要修改的產品');
+    }
+});
+
+    // 刪除產品按鈕
+    $('.btn-delete').click(function() {
+        var selectedProduct = $('input[type="checkbox"]:checked').closest('tr');
+        if (selectedProduct.length > 0) {
+            if (confirm('確定要刪除選中的產品嗎？')) {
+                var productId = selectedProduct.data('id');
+                // AJAX 刪除操作
+                $.ajax({
+                    url: '@Url.Action("ProductDelete", "Products")',
+                    type: 'POST',
+                    data: { id: productId },
+                    success: function(response) {
+                        alert('刪除成功');
+                        location.reload(); // 刷新頁面
+                    },
+                    error: function() {
+                        alert('刪除失敗');
+                    }
+                });
+            }
+        } else {
+            alert('請選擇要刪除的產品');
+        }
+    });
+});
+    </script>
+</body>
+</html>

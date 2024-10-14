@@ -12,16 +12,16 @@ namespace TISS_WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StockIn
+    public partial class OrderItems
     {
-        public int StockInID { get; set; }
-        public string ItemCode { get; set; }
+        public int OrderItemId { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
-        public Nullable<System.DateTime> ReceivedDate { get; set; }
-        public Nullable<int> SupplierID { get; set; }
-        public string Remarks { get; set; }
-        public string Barcode { get; set; }
+        public decimal Price { get; set; }
+        public System.DateTime CreatedAt { get; set; }
     
-        public virtual Supplier Supplier { get; set; }
+        public virtual Orders Orders { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

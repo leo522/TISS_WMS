@@ -1,0 +1,123 @@
+﻿@model TISS_WMS.Models.Products
+@{
+    ViewBag.Title = "ProductEdit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>編輯產品</title>
+    <link href="~/css/ProductEditStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>編輯產品</h2>
+
+    <form id="editProductForm">
+        <div>
+            <label for="productId">產品 ID:</label>
+            <input type="text" id="productId" name="ProductId" readonly>
+        </div>
+        <div>
+            <label for="productName">產品名稱:</label>
+            <input type="text" id="productName" name="ProductName" required>
+        </div>
+        <div>
+            <label for="productDescription">產品描述:</label>
+            <input type="text" id="productDescription" name="ProductDescription">
+        </div>
+        <div>
+            <label for="barcode">條碼:</label>
+            <input type="text" id="barcode" name="Barcode" required>
+        </div>
+        <div>
+            <label for="unit">單位:</label>
+            <input type="text" id="unit" name="Unit" required>
+        </div>
+        <div>
+            <label for="stockQuantity">數量:</label>
+            <input type="number" id="stockQuantity" name="StockQuantity" required>
+        </div>
+        <div>
+            <label for="price">單價:</label>
+            <input type="number" id="price" name="Price" required>
+        </div>
+        <div>
+            <label for="remark">備註:</label>
+            <input type="text" id="remark" name="Remark">
+        </div>
+        <div>
+            <input type="submit" value="保存變更">
+        </div>
+    </form>
+
+    <div>
+        <button id="backToList">返回列表</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 取得產品 ID
+            var productId = getQueryStringParameter('id');
+            if (!productId) {
+                alert('無效的產品 ID');
+                window.location.href = '/Products/ProductList'; // 返回列表
+                return;
+            }
+
+            // 使用 AJAX 請求產品資料並填充表單
+            $.get('/Products/GetProduct', { id: productId }, function(data) {
+                $('#productId').val(data.ProductId);
+                $('#productName').val(data.ProductName);
+                $('#productDescription').val(data.ProductDescription);
+                $('#barcode').val(data.Barcode);
+                $('#unit').val(data.Unit);
+                $('#stockQuantity').val(data.StockQuantity);
+                $('#price').val(data.Price);
+                $('#remark').val(data.Remark);
+            });
+
+            // 保存編輯的產品
+            $('#editProductForm').submit(function(event) {
+                event.preventDefault();
+
+                var formData = {
+                    ProductId: $('#productId').val(),
+                    ProductName: $('#productName').val(),
+                    ProductDescription: $('#productDescription').val(),
+                    Barcode: $('#barcode').val(),
+                    Unit: $('#unit').val(),
+                    StockQuantity: $('#stockQuantity').val(),
+                    Price: $('#price').val(),
+                    Remark: $('#remark').val()
+                };
+
+                $.ajax({
+                    url: '/Products/ProductEdit',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        alert('保存成功');
+                        window.location.href = '/Products/ProductList'; // 保存成功後返回列表
+                    },
+                    error: function() {
+                        alert('保存失敗');
+                    }
+                });
+            });
+
+            // 返回列表
+            $('#backToList').click(function() {
+                window.location.href = '/Products/ProductList';
+            });
+
+            // 取得 URL 中的查詢參數
+            function getQueryStringParameter(param) {
+                var urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+        });
+    </script>
+</body>
+</html>
