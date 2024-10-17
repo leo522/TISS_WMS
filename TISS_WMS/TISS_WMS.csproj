@@ -209,6 +209,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="css\MainStyle.css" />
     <Content Include="css\ProductCreateStyle.css" />
+    <Content Include="css\ProductDelStyle.css" />
+    <Content Include="css\ProductEditStyle.css" />
     <Content Include="css\StockCreateStyle.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
@@ -2404,6 +2406,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SweetAlert2\sweetalert.min.js" />
+    <Content Include="SweetAlert2\sweetalert2%4011.js" />
+    <Content Include="SweetAlert2\sweetalert2.all.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2428,6 +2433,7 @@
     <Content Include="Views\Products\ProductCreate.cshtml" />
     <Content Include="Views\Products\ProductList.cshtml" />
     <Content Include="Views\Products\ProductEdit.cshtml" />
+    <Content Include="Views\Products\ProductDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

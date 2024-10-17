@@ -24,7 +24,7 @@ namespace TISS_WMS.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //防止CSRF攻擊
         public ActionResult ProductCreate([Bind(Include = "ProductName,ProductDescription,Barcode,Unit,StockQuantity,Price,Remark")] Products product)
         {
             try
@@ -37,10 +37,10 @@ namespace TISS_WMS.Controllers
                     _db.Products.Add(product);
                     _db.SaveChanges();
 
-                    return RedirectToAction("ProductList"); // 保存成功後重定向到產品列表
+                    return RedirectToAction("ProductList");
                 }
 
-                return View(product); // 如果資料驗證失敗，重新顯示表單
+                return View(product);
             }
             catch (Exception ex)
             {
@@ -50,10 +50,31 @@ namespace TISS_WMS.Controllers
         }
         #endregion
 
+        #region FIFO 產品出庫管理
+        public ActionResult ProductFIFO()
+        {
+            // 根據產品建立時間排序，以先進先出順序處理
+            var fifoProduct = _db.Products
+                .OrderBy(p => p.CreatedAt)
+                .FirstOrDefault();
+
+            if (fifoProduct != null)
+            {
+                // 處理出庫邏輯
+                fifoProduct.StockQuantity -= 1; // 減少庫存
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("ProductList");
+        }
+        #endregion
+
         #region 顯示產品列表
         public ActionResult ProductList()
         {
-            var dtos = _db.Products.ToList();
+            var dtos = _db.Products
+                  .OrderBy(p => p.CreatedAt) // 按建立日期排序
+                  .ToList();
             return View(dtos);
         }
         #endregion
@@ -83,7 +104,7 @@ namespace TISS_WMS.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //防止CSRF攻擊
         public ActionResult ProductEdit([Bind(Include = "ProductId,ProductName,ProductDescription,Barcode,Unit,StockQuantity,Price,Remark")] Products product)
         {
             try
@@ -107,6 +128,8 @@ namespace TISS_WMS.Controllers
 
         #region 刪除產品
         [HttpPost]
+        [ValidateAntiForgeryToken] // 防止 CSRF 攻擊
+        [Authorize(Roles = "Admin")] // 僅限於管理員角色刪除產品
         public ActionResult ProductDelete(int id)
         {
             try

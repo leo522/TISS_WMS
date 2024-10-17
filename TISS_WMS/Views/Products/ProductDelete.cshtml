@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "刪除產品";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刪除產品</title>
+    <link href="~/css/ProductDelStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>確定要刪除產品嗎？</h2>
+
+    <button id="deleteProductBtn">刪除產品</button>
+
+    <div>
+        <button id="backToList" class="btn btn-secondary">返回列表</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 取得產品 ID
+            var productId = getQueryStringParameter('id');
+            if (!productId) {
+                Swal.fire({
+                    title: '錯誤',
+                    text: '無效的產品 ID',
+                    icon: 'error',
+                    confirmButtonText: '確定'
+                }).then(() => {
+                    window.location.href = '/Products/ProductList';
+                });
+                return;
+            }
+
+            // 刪除產品按鈕
+            $('#deleteProductBtn').click(function() {
+                Swal.fire({
+                    title: '確定要刪除嗎？',
+                    text: "這將永久刪除產品！",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: '刪除',
+                    cancelButtonText: '取消'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/Products/ProductDelete',
+                            type: 'POST',
+                            data: { id: productId },
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: '刪除成功',
+                                        text: '產品已被刪除',
+                                        icon: 'success',
+                                        confirmButtonText: '確定'
+                                    }).then(() => {
+                                        window.location.href = '/Products/ProductList';
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: '錯誤',
+                                        text: response.message,
+                                        icon: 'error',
+                                        confirmButtonText: '確定'
+                                    });
+                                }
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    title: '刪除失敗',
+                                    text: '請重試',
+                                    icon: 'error',
+                                    confirmButtonText: '確定'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            // 返回列表按鈕
+            $('#backToList').click(function() {
+                window.location.href = '/Products/ProductList';
+            });
+
+            // 取得 URL 中的查詢參數
+            function getQueryStringParameter(param) {
+                var urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+        });
+    </script>
+</body>
+</html>

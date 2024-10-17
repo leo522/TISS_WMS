@@ -42,58 +42,69 @@
             <input type="text" id="remark" name="Remark">
         </div>
         <div>
-            <input type="submit" value="保存產品">
+            <input type="submit" class="btn btn-success" value="保存產品">
         </div>
     </form>
 
     <div>
-        <button id="backToList">返回產品列表</button>
+        <button id="backToList" class="btn btn-secondary">返回產品列表</button>
     </div>
 
     <script>
-    $(document).ready(function () {
-        // 當頁面加載時，使用 AJAX 向後端請求生成條碼
-        $.get('/Products/GenerateBarcodeString', function (data) {
-            $('#barcode').val(data.barcode); // 條碼仍然會自動生成但不顯示
-        });
+        $(document).ready(function () {
+            // 當頁面加載時，使用 AJAX 向後端請求生成條碼
+            $.get('/Products/GenerateBarcodeString', function (data) {
+                $('#barcode').val(data.barcode); // 條碼仍然會自動生成但不顯示
+            });
 
-        // 表單提交處理
-        $('#createProductForm').submit(function (event) {
-            event.preventDefault();
+            // 表單提交處理
+            $('#createProductForm').submit(function (event) {
+                event.preventDefault();
 
-            // 取得防偽標記
-            var token = $('input[name="__RequestVerificationToken"]').val();
+                // 取得防偽標記
+                var token = $('input[name="__RequestVerificationToken"]').val();
 
-            var formData = {
-                __RequestVerificationToken: token, // 傳遞防偽標記
-                ProductName: $('#productName').val(),
-                ProductDescription: $('#productDescription').val(),
-                Barcode: $('#barcode').val(), // 條碼已自動生成，將其提交
-                Unit: $('#unit').val(),
-                StockQuantity: $('#stockQuantity').val(),
-                Price: $('#price').val(),
-                Remark: $('#remark').val()
-            };
+                var formData = {
+                    __RequestVerificationToken: token, // 傳遞防偽標記
+                    ProductName: $('#productName').val(),
+                    ProductDescription: $('#productDescription').val(),
+                    Barcode: $('#barcode').val(), // 條碼已自動生成，將其提交
+                    Unit: $('#unit').val(),
+                    StockQuantity: $('#stockQuantity').val(),
+                    Price: $('#price').val(),
+                    Remark: $('#remark').val()
+                };
 
-            $.ajax({
-                url: '/Products/ProductCreate',
-                type: 'POST',
-                data: formData,
-                success: function (response) {
-                    alert('產品新增成功');
-                    window.location.href = '/Products/ProductList';
-                },
-                error: function () {
-                    alert('新增產品失敗');
-                }
+                $.ajax({
+                    url: '/Products/ProductCreate',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        Swal.fire({
+                            title: '產品新增成功',
+                            icon: 'success',
+                            confirmButtonText: '確定',
+                            onClose: () => {
+                                window.location.href = '/Products/ProductList';
+                            }
+                        });
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: '新增產品失敗',
+                            text: '請檢查表單並再試一次',
+                            icon: 'error',
+                            confirmButtonText: '確定'
+                        });
+                    }
+                });
+            });
+
+            // 返回列表
+            $('#backToList').click(function () {
+                window.location.href = '/Products/ProductList';
             });
         });
-
-        // 返回列表
-        $('#backToList').click(function () {
-            window.location.href = '/Products/ProductList';
-        });
-    });
     </script>
 </body>
 </html>

@@ -11,15 +11,17 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="actions">
-        <button class="btn-add">新 增</button>
-        <button class="btn-edit">修 改</button>
-        <button class="btn-delete">刪 除</button>
+        <button class="btn-add">新增產品</button>
+        <button class="btn-edit">修改產品</button>
+        <button class="btn-delete">刪除產品</button>
     </div>
 
-    <table id="productsTable" class="display" style="width:100%">
+    @Html.AntiForgeryToken() <!-- CSRF 防護標記 -->
+<table id="productsTable" class="display" style="width:100%">
         <thead>
             <tr>
                 <th><input type="checkbox" id="selectAll"></th>
@@ -30,9 +32,10 @@
                 <th>數量</th>
                 <th>單價</th>
                 <th>備註</th>
+                <th>建立日期</th> <!-- 新增的建立日期欄位 -->
             </tr>
         </thead>
-        <tbody>
+<tbody>
             @foreach (var product in Model)
             {
                 <tr data-id="@product.ProductId">
@@ -44,66 +47,123 @@
                     <td>@product.StockQuantity</td>
                     <td>@product.Price</td>
                     <td>@product.Remark</td>
+                    <td>@product.CreatedAt.ToString("yyyy-MM-dd")</td> <!-- 顯示建立日期 -->
                 </tr>
             }
-        </tbody>
+</tbody>
     </table>
     <script>
         $(document).ready(function () {
-    $('#productsTable').DataTable({
-        "paging": true,
-        "searching": false,
-        "info": true,
-        "lengthChange": false
-    });
-
-    // Select/Deselect all checkboxes
-    $('#selectAll').click(function () {
-        var isChecked = $(this).prop('checked');
-        $('#productsTable tbody input[type="checkbox"]').prop('checked', isChecked);
-    });
-
-    // 新增產品按鈕
-    $('.btn-add').click(function() {
-        window.location.href = '@Url.Action("ProductCreate", "Products")';
-    });
-
-    // 編輯產品按鈕
-    $('.btn-edit').click(function() {
-    var selectedProduct = $('input[type="checkbox"]:checked').closest('tr');
-    if (selectedProduct.length > 0) {
-        var productId = selectedProduct.data('id'); // 獲取產品 ID
-        window.location.href = '@Url.Action("ProductEdit", "Products", new { id = "__id__" })'.replace('__id__', productId);
-    } else {
-        alert('請選擇要修改的產品');
-    }
-});
-
-    // 刪除產品按鈕
-    $('.btn-delete').click(function() {
-        var selectedProduct = $('input[type="checkbox"]:checked').closest('tr');
-        if (selectedProduct.length > 0) {
-            if (confirm('確定要刪除選中的產品嗎？')) {
-                var productId = selectedProduct.data('id');
-                // AJAX 刪除操作
-                $.ajax({
-                    url: '@Url.Action("ProductDelete", "Products")',
-                    type: 'POST',
-                    data: { id: productId },
-                    success: function(response) {
-                        alert('刪除成功');
-                        location.reload(); // 刷新頁面
+            $('#productsTable').DataTable({
+                "paging": true,
+                "searching": false,
+                "info": true,
+                "lengthChange": false,
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "表中數據為空",
+                    "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+                    "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+                    "infoFiltered": "(由 _MAX_ 項結果過濾)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "顯示 _MENU_ 項結果",
+                    "loadingRecords": "載入中...",
+                    "processing": "處理中...",
+                    "search": "搜尋:",
+                    "zeroRecords": "沒有匹配結果",
+                    "paginate": {
+                        "first": "首頁",
+                        "last": "末頁",
+                        "next": "下一頁",
+                        "previous": "上一頁"
                     },
-                    error: function() {
-                        alert('刪除失敗');
+                    "aria": {
+                        "sortAscending": ": 以升序排列此列",
+                        "sortDescending": ": 以降序排列此列"
                     }
-                });
-            }
-        } else {
-            alert('請選擇要刪除的產品');
-        }
-    });
-});
+                }
+            });
+
+            // Select/Deselect all checkboxes
+            $('#selectAll').click(function () {
+                var isChecked = $(this).prop('checked');
+                $('#productsTable tbody input[type="checkbox"]').prop('checked', isChecked);
+            });
+
+            // 新增產品按鈕
+            $('.btn-add').click(function() {
+                window.location.href = '@Url.Action("ProductCreate", "Products")';
+            });
+
+            // 編輯產品按鈕
+            $('.btn-edit').click(function() {
+                var selectedProduct = $('input[type="checkbox"]:checked').closest('tr');
+                if (selectedProduct.length > 0) {
+                    var productId = selectedProduct.data('id');
+                    window.location.href = '/Products/ProductEdit?id=' + productId; // 使用此方式直接拼接 URL
+                } else {
+                    Swal.fire({
+                        title: '錯誤',
+                        text: '請選擇要修改的產品',
+                        icon: 'warning',
+                        confirmButtonText: '確定'
+                    });
+                }
+            });
+
+            // 刪除產品按鈕
+            $('.btn-delete').click(function() {
+                var selectedProduct = $('input[type="checkbox"]:checked').closest('tr');
+                if (selectedProduct.length > 0) {
+                    Swal.fire({
+                        title: '確定要刪除嗎？',
+                        text: "這將永久刪除產品！",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: '刪除',
+                        cancelButtonText: '取消'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var productId = selectedProduct.data('id');
+                            $.ajax({
+                                url: '@Url.Action("ProductDelete", "Products")',
+                                type: 'POST',
+                                data: {
+                                    id: productId,
+                                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() // 添加 CSRF 防偽標記
+                                },
+                                success: function() {
+                                    Swal.fire(
+                                        '刪除成功',
+                                        '產品已被刪除',
+                                        'success'
+                                    ).then(() => {
+                                        location.reload();
+                                    });
+                                },
+                                error: function() {
+                                    Swal.fire(
+                                        '刪除失敗',
+                                        '請重試',
+                                        'error'
+                                    );
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: '錯誤',
+                        text: '請選擇要刪除的產品',
+                        icon: 'warning',
+                        confirmButtonText: '確定'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
